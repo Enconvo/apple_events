@@ -1,0 +1,114 @@
+import { uuid, Action, ActionProps, AppleCalender, Clipboard, llm, res, ChatHistory } from "@enconvo/api";
+import { HumanMessage, SystemMessage } from "@langchain/core/messages";
+
+
+
+export default async function main(req: Request) {
+
+  const { options } = await req.json()
+  const { text, context } = options
+
+  try {
+    let content = text || context || await Clipboard.selectedText();
+
+    if (!content) {
+      return new Response("", { status: 400, statusText: "No text to process" })
+    }
+
+
+
+    const requestId = uuid()
+    // 如果translateText中有换行符，需要添加> 符号
+    if (content) {
+      await res.context({ id: requestId, role: "human", content: content })
+    }
+
+
+    // format : 2021-01-01 10:00:00
+    const nowTime = new Date().toLocaleString()
+    const messages = [
+      new SystemMessage(`As Apple's Calendar software`),
+      new HumanMessage(`Please extract the title and  startDate & endDate(format: (YYYY-MM-DD HH:MM:SS) like 2022-12-31 23:59:59) of Calendar Event from the following text.And Just return it to me in JSON format, No explanation needed!.
+Example Input:
+  Remind me tomorrow morning at 10 o'clock to go to Beijing for a meeting.
+
+Example Output:
+{
+  "title": "Go to Beijing for a meeting at 10 o'clock",
+  "startDate": "2021-01-02 10:00:00"
+  "endDate": "2021-01-02 11:00:00"
+}
+
+
+
+Input: 
+${content}
+
+Explanation About The DueDate :
+ 1. Please carefully and seriously calculate the time, do not make any errors in time! This is very important to me!
+ 2. If no specific time is specified, then it defaults to 08:00:00 of that day.
+ 3. Now is ${nowTime} 
+
+Response Language:
+Reply in the same language as the one used for input.
+
+Output:
+
+  `),
+    ];
+
+    res.write("Analyzing the event ...", true)
+
+    const chat = llm.chatModel(options.llm);
+
+    const llmResult = await chat.invoke(messages)
+
+    let completion: string | undefined = llmResult.content as string;
+    completion = completion.replace(/```json/g, "")
+    completion = completion.replace(/```/g, "")
+    // 只获取 {}json内容，如果有多余的文字，去掉
+    completion = completion.match(/{.*}/s)?.[0];
+
+    if (!completion) throw new Error("Invalid JSON format")
+
+    try {
+      const completionOBJ = JSON.parse(completion)
+      console.log("completionOBJ", completionOBJ)
+
+
+      const result = await AppleCalender.addEvent({
+        title: completionOBJ.title,
+        startDate: completionOBJ.startDate,
+        endDate: completionOBJ.endDate,
+      })
+
+      await ChatHistory.saveChatMessages({
+        input: content,
+        output: result,
+        llmOptions: options.llm,
+        messages,
+        requestId
+      });
+
+      const actions: ActionProps[] = [
+        Action.Paste(result, true),
+        Action.OpenApplication({ app: "Calendar", title: "Open Calendar.app", icon: "calender.png" }),
+        Action.Copy(result)
+      ]
+
+      const output = {
+        content: result,
+        actions: actions
+      }
+
+      return output;
+
+    } catch (error) {
+      throw new Error("Invalid JSON format")
+    }
+
+  } catch (e) {
+    //@ts-ignore
+    return e.message;
+  }
+}

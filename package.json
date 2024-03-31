@@ -1,0 +1,90 @@
+{
+  "$schema": "https://enconvo.com/schemas/extension.json",
+  "version": "0.0.1",
+  "author": "ysnows",
+  "license": "MIT",
+  "categories": [
+    "File"
+  ],
+  "type": "module",
+  "name": "calender",
+  "title": "Apple Events",
+  "description": "Manage your schedule with Apple Events App like Calendar and Reminder.",
+  "icon": "calender.png",
+  "minAppVersion": "1.4.9",
+  "commands": [
+    {
+      "name": "add_event_to_apple_calender",
+      "title": "Add To Apple Calendar",
+      "description": "Add an event to Apple Calendar.",
+      "icon": "calender.png",
+      "mode": "no-view",
+      "aiPlugin": true,
+      "params": [
+        {
+          "name": "text",
+          "description": "An event text containing the event title and the startDate & endDate(Date format: (YYYY-MM-DD HH:MM:SS) like 2022-12-31 23:59:59).",
+          "type": "string",
+          "required": true,
+          "default": ""
+        }
+      ],
+      "preferences": [
+        {
+          "name": "llm",
+          "description": "The model used to generate responses",
+          "type": "extension",
+          "required": false,
+          "default": "default",
+          "title": "LLM Model"
+        }
+      ]
+    },
+    {
+      "name": "add_event_to_apple_reminder",
+      "title": "Add To Apple Reminder",
+      "description": "Add an event to Apple Reminder.",
+      "icon": "reminder.png",
+      "mode": "no-view",
+      "aiPlugin": true,
+      "params": [
+        {
+          "name": "text",
+          "description": "An event text containing the event title and the dueDate(Date format: (YYYY-MM-DD HH:MM:SS) like 2022-12-31 23:59:59).",
+          "type": "string",
+          "required": true,
+          "default": ""
+        }
+      ],
+      "preferences": [
+        {
+          "name": "llm",
+          "description": "The model used to generate responses",
+          "type": "extension",
+          "required": false,
+          "default": "default",
+          "title": "LLM Model"
+        }
+      ]
+    }
+  ],
+  "dependencies": {
+    "@enconvo/api": "^0.1.1",
+    "@langchain/core": "^0.1.52"
+  },
+  "devDependencies": {
+    "@types/node": "^18.17.14",
+    "eslint": "^8.33.0",
+    "prettier": "^2.8.3",
+    "tsup": "^7.2.0",
+    "typescript": "^5.0.4"
+  },
+  "scripts": {
+    "lint": "eslint src",
+    "lint:fix": "npm run lint --fix",
+    "format": "prettier --write \"**/*.ts\"",
+    "format:check": "prettier --list-different \"**/*.ts\"",
+    "build": "enconvo",
+    "dev": "enconvo --dev"
+  }
+}
