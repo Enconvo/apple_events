@@ -1,4 +1,4 @@
-import { uuid, Action, ActionProps, AppleCalender, Clipboard, llm, res, ChatHistory } from "@enconvo/api";
+import { uuid, Action, ActionProps, AppleCalender, Clipboard, llm, res, ChatHistory, LLMUtil, LLMProviderBase, ServiceProvider } from "@enconvo/api";
 import { HumanMessage, SystemMessage } from "@langchain/core/messages";
 
 
@@ -9,20 +9,13 @@ export default async function main(req: Request) {
   const { text, context } = options
 
   try {
-    let content = text || context || await Clipboard.selectedText();
+    let content = text || context;
 
     if (!content) {
-      return new Response("", { status: 400, statusText: "No text to process" })
+      throw new Error("No text to process")
     }
-
-
 
     const requestId = uuid()
-    // 如果translateText中有换行符，需要添加> 符号
-    if (content) {
-      await res.context({ id: requestId, role: "human", content: content })
-    }
-
 
     // format : 2021-01-01 10:00:00
     const nowTime = new Date().toLocaleString()
@@ -57,13 +50,19 @@ Output:
   `),
     ];
 
-    res.write("Analyzing the event ...", true)
+    res.write({
+      content: "Analyzing the event ...",
+      overwrite: true
+    })
 
-    const chat = llm.chatModel(options.llm);
+    const chat: LLMProviderBase = ServiceProvider.load(options.llm)
 
-    const llmResult = await chat.invoke(messages)
+    const stream = (await chat.call({ messages })).stream!
+    const llmResult = await LLMUtil.invokeLLM(stream)
 
-    let completion: string | undefined = llmResult.content as string;
+
+    let completion: string | undefined = llmResult;
+
     completion = completion.replace(/```json/g, "")
     completion = completion.replace(/```/g, "")
     // 只获取 {}json内容，如果有多余的文字，去掉
@@ -91,9 +90,15 @@ Output:
       });
 
       const actions: ActionProps[] = [
-        Action.Paste(result, true),
+        Action.Paste({
+          content: result,
+          closeMainWindow: true
+        }),
         Action.OpenApplication({ app: "Calendar", title: "Open Calendar.app", icon: "calender.png" }),
-        Action.Copy(result)
+        Action.Copy({
+          content: result,
+          closeMainWindow: true
+        })
       ]
 
       const output = {

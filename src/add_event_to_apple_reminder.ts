@@ -1,4 +1,4 @@
-import { uuid, ActionProps, Action, ChatHistory, res, AppleCalender, Clipboard, llm } from "@enconvo/api";
+import { uuid, ActionProps, Action, ChatHistory, res, AppleCalender, Clipboard, ServiceProvider, LLMProviderBase, LLMUtil } from "@enconvo/api";
 import { HumanMessage, SystemMessage } from "@langchain/core/messages";
 
 export default async function main(req: Request) {
@@ -6,25 +6,21 @@ export default async function main(req: Request) {
   const { options } = await req.json()
   const { text, context, llm: llmOptions } = options
 
-  try {
-    let content = text || context || await Clipboard.selectedText();
+  let content = text || context || await Clipboard.selectedText();
 
-    if (!content) {
-      return new Response("", { status: 400, statusText: "No text to process" })
-    }
+  if (!content) {
+    throw new Error("No text to process")
+  }
 
-    const requestId = uuid()
-    // 如果translateText中有换行符，需要添加> 符号
-    if (content) {
-      await res.context({ id: requestId, role: "human", content: content })
-    }
+  const requestId = uuid()
+  // 如果translateText中有换行符，需要添加> 符号
 
-    // format : 2021-01-01 10:00:00
-    const nowTime = new Date().toLocaleString()
+  // format : 2021-01-01 10:00:00
+  const nowTime = new Date().toLocaleString()
 
-    const messages = [
-      new SystemMessage(`As Apple's Reminder software`),
-      new HumanMessage(`Please extract the title and due date(format: (YYYY-MM-DD HH:MM:SS) like 2022-12-31 23:59:59) of Reminder from the following text.And Just return it to me in JSON format, No explanation needed!.
+  const messages = [
+    new SystemMessage(`As Apple's Reminder software`),
+    new HumanMessage(`Please extract the title and due date(format: (YYYY-MM-DD HH:MM:SS) like 2022-12-31 23:59:59) of Reminder from the following text.And Just return it to me in JSON format, No explanation needed!.
 Example Input:
   Remind me tomorrow morning at 10 o'clock to go to Beijing for a meeting.
 
@@ -49,58 +45,66 @@ Reply in the same language as the one used for input.
 Output:
 
   `),
-    ];
+  ];
 
-    res.write("Analyzing the event ...", true)
+  res.write({
+    content: "Analyzing the event ...",
+    overwrite: true
+  })
 
-    console.log("messages", messages)
+  console.log("messages", messages)
 
-    const chat = llm.chatModel(llmOptions);
+  const chat: LLMProviderBase = ServiceProvider.load(llmOptions)
 
-    const llmResult = await chat.invoke(messages)
+  const stream = (await chat.call({ messages })).stream!
+  const llmResult = await LLMUtil.invokeLLM(stream)
 
-    let completion: string | undefined = llmResult.content as string;
-    completion = completion.replace(/```json/g, "")
-    completion = completion.replace(/```/g, "")
-    // 只获取 {}json内容，如果有多余的文字，去掉
-    completion = completion.match(/{.*}/s)?.[0];
 
-    if (!completion) throw new Error("Invalid JSON format")
+  let completion: string | undefined = llmResult;
 
-    try {
-      const completionOBJ = JSON.parse(completion)
-      console.log("completionOBJ", completionOBJ)
+  completion = completion.replace(/```json/g, "")
+  completion = completion.replace(/```/g, "")
+  // 只获取 {}json内容，如果有多余的文字，去掉
+  completion = completion.match(/{.*}/s)?.[0];
 
-      const result = await AppleCalender.addReminder({
-        title: completionOBJ.title,
-        dueDate: completionOBJ.dueDate,
-      })
+  if (!completion) throw new Error("Invalid JSON format")
 
-      await ChatHistory.saveChatMessages({
-        input: content,
-        output: result,
-        llmOptions: options.llm,
-        messages,
-        requestId
-      });
-      const actions: ActionProps[] = [
-        Action.Paste(result, true),
-        Action.OpenApplication({ app: "Reminders", title: "Open Reminders.app", icon: "reminder.png" }),
-        Action.Copy(result)
-      ]
+  try {
+    const completionOBJ = JSON.parse(completion)
+    console.log("completionOBJ", completionOBJ)
 
-      const output = {
+    const result = await AppleCalender.addReminder({
+      title: completionOBJ.title,
+      dueDate: completionOBJ.dueDate,
+    })
+
+    await ChatHistory.saveChatMessages({
+      input: content,
+      output: result,
+      llmOptions: options.llm,
+      messages,
+      requestId
+    });
+    const actions: ActionProps[] = [
+      Action.Paste({
         content: result,
-        actions: actions
-      }
+        closeMainWindow: true
+      }),
+      Action.OpenApplication({ app: "Reminders", title: "Open Reminders.app", icon: "reminder.png" }),
+      Action.Copy({
+        content: result,
+        closeMainWindow: true
+      })
+    ]
 
-      return output;
-    } catch (error) {
-      throw new Error("Invalid JSON format" + error.message)
+    const output = {
+      content: result,
+      actions: actions
     }
 
-  } catch (e) {
-    //@ts-ignore
-    return e.message;
+    return output;
+  } catch (error) {
+    throw new Error("Invalid JSON format" + error.message)
   }
+
 }

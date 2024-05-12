@@ -1,6 +1,6 @@
 {
   "$schema": "https://enconvo.com/schemas/extension.json",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "ysnows",
   "license": "MIT",
   "categories": [
@@ -69,15 +69,15 @@
     }
   ],
   "dependencies": {
-    "@enconvo/api": "^0.1.1",
-    "@langchain/core": "^0.1.52"
+    "@enconvo/api": "^0.1.128",
+    "@langchain/core": "^0.1.62"
   },
   "devDependencies": {
-    "@types/node": "^18.17.14",
-    "eslint": "^8.33.0",
-    "prettier": "^2.8.3",
+    "@types/node": "^18.19.33",
+    "eslint": "^8.57.0",
+    "prettier": "^2.8.8",
     "tsup": "^7.2.0",
-    "typescript": "^5.0.4"
+    "typescript": "^5.4.5"
   },
   "scripts": {
     "lint": "eslint src",
