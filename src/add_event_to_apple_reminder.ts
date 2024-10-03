@@ -47,12 +47,23 @@ Output:
   `),
   ];
 
-  res.write({
-    content: "Analyzing the event ...",
+
+  const resultID = uuid()
+
+  await res.write({
+    content: {
+      id: resultID,
+      role: "ai",
+      content: [
+        {
+          type: 'text',
+          text: "Analyzing the event ...",
+        }
+      ]
+    },
     overwrite: true
   })
 
-  console.log("messages", messages)
 
   const chat: LLMProviderBase = ServiceProvider.load(llmOptions)
 
@@ -69,42 +80,50 @@ Output:
 
   if (!completion) throw new Error("Invalid JSON format")
 
-  try {
-    const completionOBJ = JSON.parse(completion)
-    console.log("completionOBJ", completionOBJ)
+  const completionOBJ = JSON.parse(completion)
+  console.log("completionOBJ", completionOBJ)
 
-    const result = await AppleCalender.addReminder({
-      title: completionOBJ.title,
-      dueDate: completionOBJ.dueDate,
-    })
+  const result = await AppleCalender.addReminder({
+    title: completionOBJ.title,
+    dueDate: completionOBJ.dueDate,
+  })
 
-    await ChatHistory.saveChatMessages({
-      input: content,
-      output: result,
-      llmOptions: options.llm,
-      messages,
-      requestId
-    });
-    const actions: ActionProps[] = [
-      Action.Paste({
-        content: result,
-        closeMainWindow: true
-      }),
-      Action.OpenApplication({ app: "Reminders", title: "Open Reminders.app", icon: "reminder.png" }),
-      Action.Copy({
-        content: result,
-        closeMainWindow: true
-      })
-    ]
-
-    const output = {
+  await ChatHistory.saveChatMessages({
+    input: content,
+    output: result,
+    llmOptions: options.llm,
+    messages,
+    requestId
+  });
+  const actions: ActionProps[] = [
+    Action.Paste({
       content: result,
-      actions: actions
-    }
+      closeMainWindow: true
+    }),
+    Action.OpenApplication({ app: "Reminders", title: "Open Reminders.app", icon: "reminder.png" }),
+    Action.Copy({
+      content: result,
+      closeMainWindow: true
+    })
+  ]
 
-    return output;
-  } catch (error) {
-    throw new Error("Invalid JSON format" + error.message)
+  const output = {
+    type: "messages",
+    messages: [
+      {
+        id: resultID,
+        role: "ai",
+        content: [
+          {
+            type: 'text',
+            text: result
+          }
+        ]
+      }
+    ],
+    actions: actions
   }
+
+  return output;
 
 }

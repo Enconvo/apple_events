@@ -1,6 +1,6 @@
 {
   "$schema": "https://enconvo.com/schemas/extension.json",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "ysnows",
   "license": "MIT",
   "categories": [
@@ -36,7 +36,16 @@
           "type": "extension",
           "required": false,
           "default": "default",
-          "title": "LLM Model"
+          "title": "LLM Provider"
+        },
+        {
+          "name": "stream",
+          "label": "Stream",
+          "description": "The calendar to add the event to",
+          "type": "checkbox",
+          "required": false,
+          "default": false,
+          "title": "Stream"
         }
       ]
     },
@@ -63,7 +72,16 @@
           "type": "extension",
           "required": false,
           "default": "default",
-          "title": "LLM Model"
+          "title": "LLM Provider"
+        },
+        {
+          "name": "stream",
+          "label": "Stream",
+          "description": "The calendar to add the event to",
+          "type": "checkbox",
+          "required": false,
+          "default": false,
+          "title": "Stream"
         }
       ]
     }
