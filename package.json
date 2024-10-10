@@ -1,6 +1,6 @@
 {
   "$schema": "https://enconvo.com/schemas/extension.json",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "ysnows",
   "license": "MIT",
   "categories": [
@@ -20,6 +20,9 @@
       "icon": "calender.png",
       "mode": "no-view",
       "aiPlugin": true,
+      "accepts": [
+        "text"
+      ],
       "params": [
         {
           "name": "text",
@@ -56,6 +59,9 @@
       "icon": "reminder.png",
       "mode": "no-view",
       "aiPlugin": true,
+      "accepts": [
+        "text"
+      ],
       "params": [
         {
           "name": "text",
