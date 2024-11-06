@@ -6,9 +6,9 @@ import { HumanMessage, SystemMessage } from "@langchain/core/messages";
 export default async function main(req: Request) {
 
   const { options } = await req.json()
-  const { text, context } = options
+  const { input_text, context } = options
 
-  let content = text || context;
+  let content = input_text || context;
 
   if (!content) {
     throw new Error("No text to process")

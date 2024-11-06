@@ -1,12 +1,12 @@
-import { uuid, ActionProps, Action, ChatHistory, res, AppleCalender, Clipboard, ServiceProvider, LLMProviderBase, LLMUtil } from "@enconvo/api";
+import { uuid, ActionProps, Action, ChatHistory, res, AppleCalender, ServiceProvider, LLMProviderBase, LLMUtil } from "@enconvo/api";
 import { HumanMessage, SystemMessage } from "@langchain/core/messages";
 
 export default async function main(req: Request) {
 
   const { options } = await req.json()
-  const { text, context, llm: llmOptions } = options
+  const { input_text, context, llm: llmOptions } = options
 
-  let content = text || context || await Clipboard.selectedText();
+  let content = input_text || context;
 
   if (!content) {
     throw new Error("No text to process")
