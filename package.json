@@ -1,6 +1,6 @@
 {
   "$schema": "https://enconvo.com/schemas/extension.json",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "author": "ysnows",
   "license": "MIT",
   "categories": [
@@ -29,6 +29,10 @@
           "input_text": {
             "type": "string",
             "description": "The text to be translated"
+          },
+          "event_describe_text": {
+            "type": "string",
+            "description": "The description of the event, {title: string, startDate: string, endDate: string} , like : {title: 'Go to Beijing for a meeting at 10 o'clock', startDate: '2021-01-02 10:00:00', endDate: '2021-01-02 11:00:00'}"
           }
         }
       },
@@ -59,6 +63,10 @@
           "input_text": {
             "type": "string",
             "description": "The text to be translated"
+          },
+          "reminder_describe_text": {
+            "type": "string",
+            "description": "The description of the event, {title: string, dueDate: string} , like : {title: 'Go to Beijing for a meeting at 10 o'clock', dueDate: '2021-01-02 10:00:00'}"
           }
         }
       },
