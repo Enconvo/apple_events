@@ -4,7 +4,7 @@ export default async function main(req: Request): Promise<EnconvoResponse> {
 
   const options: RequestOptions = await req.json()
 
-  let content = options.input_text || options.selection_text || options.context;
+  let content = options.event_describe_text || options.input_text || options.selection_text || options.context;
 
   if (!content) {
     throw new Error("No text to process")
