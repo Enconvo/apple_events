@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@enconvo/api':
-        specifier: ^0.1.148
-        version: 0.1.148
+        specifier: ^0.1.161
+        version: 0.1.161
       '@types/node':
         specifier: ^22.10.2
         version: 22.10.2
@@ -29,8 +29,8 @@ importers:
 
 packages:
 
-  '@enconvo/api@0.1.148':
-    resolution: {integrity: sha512-8ICBBG4LtG++Tnwp6BIFjwqB02Q1MXMN7Y9wH5GBvi/l2zkOwCSS+XnO1EeLEDXc4f9XckPUvF/2vzkRfy4pSQ==}
+  '@enconvo/api@0.1.161':
+    resolution: {integrity: sha512-oyCp0N/0Grc1T3L+MSOJF8At2UVwe538DkI1DpuOcY6xPprIh+pbh8IuQDspuTl1GXQhkw6RwZWCD0DLV0O4gw==}
     hasBin: true
 
   '@esbuild/aix-ppc64@0.24.0':
@@ -907,7 +907,7 @@ packages:
 
 snapshots:
 
-  '@enconvo/api@0.1.148': {}
+  '@enconvo/api@0.1.161': {}
 
   '@esbuild/aix-ppc64@0.24.0':
     optional: true

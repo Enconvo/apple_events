@@ -1,6 +1,6 @@
 {
   "$schema": "https://enconvo.com/schemas/extension.json",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "author": "ysnows",
   "license": "MIT",
   "categories": [
@@ -24,9 +24,12 @@
         "text"
       ],
       "parameters": {
-        "input_text": {
-          "type": "string",
-          "description": "The text to be translated"
+        "type": "object",
+        "properties": {
+          "input_text": {
+            "type": "string",
+            "description": "The text to be translated"
+          }
         }
       },
       "preferences": [
@@ -51,9 +54,12 @@
         "text"
       ],
       "parameters": {
-        "input_text": {
-          "type": "string",
-          "description": "The text to be translated"
+        "type": "object",
+        "properties": {
+          "input_text": {
+            "type": "string",
+            "description": "The text to be translated"
+          }
         }
       },
       "preferences": [
@@ -69,7 +75,7 @@
     }
   ],
   "devDependencies": {
-    "@enconvo/api": "^0.1.148",
+    "@enconvo/api": "^0.1.161",
     "@types/node": "^22.10.2",
     "eslint": "^9.17.0",
     "prettier": "^3.4.2",
