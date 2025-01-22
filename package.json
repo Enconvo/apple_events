@@ -1,6 +1,6 @@
 {
   "$schema": "https://enconvo.com/schemas/extension.json",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "author": "ysnows",
   "license": "MIT",
   "categories": [
@@ -8,8 +8,8 @@
   ],
   "type": "module",
   "name": "calender",
-  "title": "Apple Events",
-  "description": "Manage your schedule with Apple Events App like Calendar and Reminder.",
+  "title": "Apple Calendar",
+  "description": "Manage your schedule with Apple Calendar.",
   "icon": "calender.png",
   "minAppVersion": "1.4.9",
   "commands": [
@@ -33,40 +33,6 @@
           "event_describe_text": {
             "type": "string",
             "description": "The description of the event, {title: string, startDate: string, endDate: string} , like : {title: 'Go to Beijing for a meeting at 10 o'clock', startDate: '2021-01-02 10:00:00', endDate: '2021-01-02 11:00:00'}"
-          }
-        }
-      },
-      "preferences": [
-        {
-          "name": "llm",
-          "description": "The model used to generate responses",
-          "type": "extension",
-          "required": false,
-          "default": "default",
-          "title": "LLM Provider"
-        }
-      ]
-    },
-    {
-      "name": "add_event_to_apple_reminder",
-      "title": "Add To Apple Reminder",
-      "description": "Add an event to Apple Reminder.",
-      "icon": "reminder.png",
-      "mode": "no-view",
-      "aiPlugin": true,
-      "accepts": [
-        "text"
-      ],
-      "parameters": {
-        "type": "object",
-        "properties": {
-          "input_text": {
-            "type": "string",
-            "description": "The text to be translated"
-          },
-          "reminder_describe_text": {
-            "type": "string",
-            "description": "The description of the event, {title: string, dueDate: string} , like : {title: 'Go to Beijing for a meeting at 10 o'clock', dueDate: '2021-01-02 10:00:00'}"
           }
         }
       },
