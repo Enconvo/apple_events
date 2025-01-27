@@ -1,28 +1,12 @@
-import { Action, RequestOptions, EnconvoResponse, ResponseAction } from "@enconvo/api";
-import osascript from 'osascript-tag';
+import { Action, RequestOptions, ResponseAction, AppleCalender, Response } from "@enconvo/api";
 
-export default async function main(req: Request): Promise<EnconvoResponse> {
+export default async function main(req: Request): Promise<Response> {
 
   const options: RequestOptions = await req.json()
 
-
-  const result = await osascript.default`
-tell application "Calendar"
-    set today to current date
-    set futureDate to today + (30 * days)
-    set eventList to ""
-
-    repeat with aCalendar in calendars
-        set matchedEvents to (events of aCalendar where start date ≥ today and start date ≤ futureDate)
-        repeat with anEvent in matchedEvents
-            set eventTitle to summary of anEvent
-            set startTime to start date of anEvent
-            set eventList to eventList & "标题: " & eventTitle & "\n" & "时间: " & startTime & "\n\n"
-        end repeat
-    end repeat
-    return eventList
-end tell
-`;
+  const resp = await AppleCalender.getCalendarEventList({ days: 1 })
+  console.log("resp", JSON.stringify(resp, null, 2))
+  const result = JSON.stringify(resp)
 
 
   const actions: ResponseAction[] = [
@@ -37,11 +21,7 @@ end tell
     })
   ]
 
-  return {
-    type: "text",
-    content: result,
-    actions: actions
-  };
+  return Response.text(result, actions);
 
 
 }
