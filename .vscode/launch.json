@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:calender}/swift/AppleReminders",
+            "name": "Debug AppleReminders (swift/AppleReminders)",
+            "program": "${workspaceFolder:calender}/swift/AppleReminders/.build/debug/AppleReminders",
+            "preLaunchTask": "swift: Build Debug AppleReminders (swift/AppleReminders)"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:calender}/swift/AppleReminders",
+            "name": "Release AppleReminders (swift/AppleReminders)",
+            "program": "${workspaceFolder:calender}/swift/AppleReminders/.build/release/AppleReminders",
+            "preLaunchTask": "swift: Build Release AppleReminders (swift/AppleReminders)"
+        }
+    ]
+}
