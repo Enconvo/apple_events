@@ -19,10 +19,6 @@
       "description": "Add an event to Apple Calendar.",
       "icon": "calender.png",
       "mode": "no-view",
-      "aiPlugin": true,
-      "accepts": [
-        "text"
-      ],
       "parameters": {
         "type": "object",
         "properties": {
@@ -46,6 +42,28 @@
           "title": "LLM Provider"
         }
       ]
+    },
+    {
+      "name": "get_calendar_events",
+      "title": "Get Calendar Events",
+      "description": "Get calendar events.",
+      "icon": "calender.png",
+      "mode": "no-view",
+      "parameters": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "get_calendar_list",
+      "title": "Get Calendar List",
+      "description": "Get calendar list.",
+      "icon": "calender.png",
+      "mode": "no-view",
+      "parameters": {
+        "type": "object",
+        "properties": {}
+      }
     }
   ],
   "devDependencies": {
@@ -63,5 +81,8 @@
     "format:check": "prettier --list-different \"**/*.ts\"",
     "build": "enconvo",
     "dev": "enconvo --dev"
+  },
+  "dependencies": {
+    "osascript-tag": "^0.1.2"
   }
 }

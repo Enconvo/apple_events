@@ -10,7 +10,6 @@ export default async function main(req: Request): Promise<EnconvoResponse> {
     throw new Error("No text to process")
   }
 
-
   // format : 2021-01-01 10:00:00
   const nowTime = new Date().toLocaleString()
   const messages = [
