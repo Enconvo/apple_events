@@ -4,7 +4,7 @@
   "author": "ysnows",
   "license": "MIT",
   "categories": [
-    "File"
+    "Productivity"
   ],
   "type": "module",
   "name": "calender",
@@ -121,6 +121,7 @@
       "title": "Update Calendar Event",
       "description": "Update an event to Apple Calendar.",
       "icon": "calender.png",
+      "showInCommandList": false,
       "mode": "no-view",
       "parameters": {
         "type": "object",
@@ -244,6 +245,7 @@
       "name": "delete_calendar_event",
       "title": "Delete Calendar Event",
       "description": "Delete calendar event.",
+      "showInCommandList": false,
       "icon": "calender.png",
       "mode": "no-view",
       "parameters": {
@@ -264,6 +266,7 @@
       "name": "get_calendar_list",
       "title": "Get Calendar List",
       "description": "Get calendar list.",
+      "showInCommandList": false,
       "icon": "calender.png",
       "mode": "no-view",
       "parameters": {
