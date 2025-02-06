@@ -10,18 +10,25 @@ export default async function main(req: Request): Promise<Response> {
 
   const resp = await AppleCalender.getCalendarEventList({ days: options.days || 7 })
   // Convert calendar events to markdown table format
+
+  if (options.runType === "agent") {
+    return Response.json({
+      events: resp
+    })
+  }
+
   const eventsToMarkdownTable = (events: any[]) => {
     // Create table header
     let markdown = '| Title | Start Date | End Date | Calendar | Status |\n';
     markdown += '|--------|------------|-----------|-----------|--------|\n';
-    
+
     // Add each event as a table row
     events.forEach(event => {
       const startDate = new Date(event.startDate).toLocaleDateString();
       const endDate = new Date(event.endDate).toLocaleDateString();
       markdown += `|[${event.title}](${event.openUrl})|${startDate}|${endDate}|${event.calendarTitle}|${event.status}|\n`;
     });
-    
+
     return markdown;
   };
 
