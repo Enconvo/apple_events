@@ -5,8 +5,7 @@ export default async function main(req: Request): Promise<EnconvoResponse> {
 
   const options: RequestOptions = await req.json()
 
-
-  const result = await osascript.default`
+  const result = await osascript`
 tell application "Calendar"
     get name of every calendar
 end tell

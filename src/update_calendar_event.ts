@@ -1,4 +1,4 @@
-import { Action, RequestOptions, ResponseAction, AppleCalender, Response } from "@enconvo/api";
+import { Action, RequestOptions, ResponseAction, AppleCalender, EnconvoResponse } from "@enconvo/api";
 
 interface UpdateCalendarEventOptions extends RequestOptions {
   eventId: string
@@ -33,7 +33,7 @@ interface UpdateCalendarEventOptions extends RequestOptions {
   };
 }
 
-export default async function main(req: Request): Promise<Response> {
+export default async function main(req: Request): Promise<EnconvoResponse> {
 
   const options: UpdateCalendarEventOptions = await req.json()
 
@@ -53,7 +53,7 @@ export default async function main(req: Request): Promise<Response> {
     })
   ]
 
-  return Response.text(result, actions);
+  return EnconvoResponse.text(result, actions);
 
 
 }

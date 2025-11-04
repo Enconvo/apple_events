@@ -1,11 +1,11 @@
-import { Action, RequestOptions, ResponseAction, AppleCalender, Response } from "@enconvo/api";
+import { Action, RequestOptions, ResponseAction, AppleCalender, EnconvoResponse } from "@enconvo/api";
 
 interface DeleteCalendarEventOptions extends RequestOptions {
   eventId: string
   deleteAllRecurrences?: boolean
 }
 
-export default async function main(req: Request): Promise<Response> {
+export default async function main(req: Request): Promise<EnconvoResponse> {
 
   const options: DeleteCalendarEventOptions = await req.json()
 
@@ -25,7 +25,5 @@ export default async function main(req: Request): Promise<Response> {
     })
   ]
 
-  return Response.text(result, actions);
-
-
+  return EnconvoResponse.text(result, actions);
 }

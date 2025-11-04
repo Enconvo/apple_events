@@ -1,20 +1,20 @@
-import { Action, RequestOptions, ResponseAction, AppleCalender, Response } from "@enconvo/api";
+import { Action, RequestOptions, ResponseAction, AppleCalender, Runtime, EnconvoResponse } from "@enconvo/api";
 
 interface GetCalendarEventsOptions extends RequestOptions {
   days?: number
 }
 
-export default async function main(req: Request): Promise<Response> {
+export default async function main(req: Request): Promise<EnconvoResponse> {
 
   const options: GetCalendarEventsOptions = await req.json()
 
   const resp = await AppleCalender.getCalendarEventList({ days: options.days || 7 })
   // Convert calendar events to markdown table format
 
-  if (options.runType === "agent") {
-    return Response.json({
-      events: resp
-    })
+  if (!Runtime.isInteractiveMode()) {
+    return EnconvoResponse.json(({
+      result: resp
+    }))
   }
 
   const eventsToMarkdownTable = (events: any[]) => {
@@ -51,19 +51,5 @@ export default async function main(req: Request): Promise<Response> {
     })
   ]
 
-
-  // const helloPage = () => {
-  //   return <div>
-  //     <App >
-  //     </App>
-  //   </div>
-  // }
-
-  // const container = { id: 'hello', children: [], pendingChildren: [] };
-  // renderkskkskdkdkksskskks(React.createElement(helloPage), container, () => {
-  //   console.log("renderkskkskdkdkksskskks")
-  // });
-
-
-  return Response.text(result, actions);
+  return EnconvoResponse.text(result, actions);
 }
