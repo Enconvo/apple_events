@@ -1,6 +1,6 @@
 {
   "$schema": "https://enconvo.com/schemas/extension.json",
-  "version": "0.0.78",
+  "version": "0.0.79",
   "author": "ysnows",
   "from": "store",
   "license": "MIT",
@@ -20,6 +20,7 @@
       "description": "Add an event to Apple Calendar.",
       "icon": "calender.png",
       "mode": "no-view",
+      "showInCommandList": false,
       "parameters": {
         "type": "object",
         "properties": {
@@ -231,6 +232,7 @@
       "title": "Get Calendar Events",
       "description": "Get calendar events.",
       "icon": "calender.png",
+      "showInCommandList": false,
       "mode": "no-view",
       "parameters": {
         "type": "object",
