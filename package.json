@@ -1,6 +1,6 @@
 {
   "$schema": "https://enconvo.com/schemas/extension.json",
-  "version": "0.0.79",
+  "version": "0.0.131",
   "author": "ysnows",
   "from": "store",
   "license": "MIT",
@@ -10,7 +10,7 @@
   "type": "module",
   "name": "calender",
   "title": "Apple Calendar",
-  "description": "Manage your schedule with Apple Calendar.",
+  "description": "Apple Calendar integration with full CRUD operations -- add, update, delete, and query events and calendars using native macOS APIs, with support for recurrence rules, alarms, and all-day events.",
   "icon": "calender.png",
   "minAppVersion": "1.4.9",
   "commands": [
@@ -111,7 +111,8 @@
         {
           "name": "llm",
           "description": "The model used to generate responses",
-          "type": "extension",
+          "type": "provider",
+          "providerCategory": "llm",
           "required": false,
           "default": "default",
           "title": "LLM Provider"
@@ -220,7 +221,8 @@
         {
           "name": "llm",
           "description": "The model used to generate responses",
-          "type": "extension",
+          "type": "provider",
+          "providerCategory": "llm",
           "required": false,
           "default": "default",
           "title": "LLM Provider"
@@ -295,11 +297,11 @@
     "lint:fix": "npm run lint --fix",
     "format": "prettier --write \"**/*.ts\"",
     "format:check": "prettier --list-different \"**/*.ts\"",
-    "build": "enconvo",
-    "dev": "enconvo --dev"
+    "build": "enconvo dev",
+    "dev": "enconvo dev --dev"
   },
   "dependencies": {
     "osascript-tag": "^0.1.2",
-    "@enconvo/api": "link:/Users/ysnows/Documents/Project/enconvo.nodejs/enconvo_api"
+    "@enconvo/api": "link:../../enconvo.nodejs/enconvo_api"
   }
 }
