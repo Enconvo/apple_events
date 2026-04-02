@@ -1,4 +1,4 @@
-import { AppleCalender } from "@enconvo/api";
+import { deleteCalendarEvent } from "./apple_calendar.ts";
 
 /** Delete calendar event request params */
 interface DeleteCalendarEventParams {
@@ -20,6 +20,6 @@ export default async function main(req: Request) {
     throw new Error("eventId is required");
   }
 
-  const result = await AppleCalender.deleteCalendarEvent(params);
+  const result = await deleteCalendarEvent(params);
   return Response.json({ result });
 }

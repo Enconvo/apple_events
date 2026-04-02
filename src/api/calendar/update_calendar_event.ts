@@ -1,4 +1,4 @@
-import { AppleCalender } from "@enconvo/api";
+import { updateEvent } from "./apple_calendar.ts";
 
 /** Update calendar event request params */
 interface UpdateCalendarEventParams {
@@ -42,6 +42,6 @@ export default async function main(req: Request) {
     throw new Error("eventId is required");
   }
 
-  const result = await AppleCalender.updateEvent(params);
+  const result = await updateEvent(params);
   return Response.json({ result });
 }

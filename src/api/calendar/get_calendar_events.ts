@@ -1,4 +1,4 @@
-import { AppleCalender } from "@enconvo/api";
+import { getCalendarEvents } from "./apple_calendar.ts";
 
 /** Get calendar events request params */
 interface GetCalendarEventsParams {
@@ -19,6 +19,6 @@ interface GetCalendarEventsParams {
  */
 export default async function main(req: Request) {
   const params = (await req.json()) as GetCalendarEventsParams;
-  const result = await AppleCalender.getCalendarEvents(params);
+  const result = await getCalendarEvents(params);
   return Response.json({ result });
 }

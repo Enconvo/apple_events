@@ -1,4 +1,4 @@
-import { AppleCalender } from "@enconvo/api";
+import { addEvent } from "./apple_calendar.ts";
 
 /** Add event to Apple Calendar request params */
 interface AddEventParams {
@@ -49,6 +49,6 @@ export default async function main(req: Request) {
     throw new Error("title, startDate, and endDate are required");
   }
 
-  const result = await AppleCalender.addEvent(params);
+  const result = await addEvent(params);
   return Response.json({ result });
 }

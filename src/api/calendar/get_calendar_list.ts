@@ -1,4 +1,4 @@
-import { AppleCalender } from "@enconvo/api";
+import { getCalendarList } from "./apple_calendar.ts";
 
 /**
  * Get list of all calendars with details
@@ -6,6 +6,6 @@ import { AppleCalender } from "@enconvo/api";
  * @returns Array of calendars with id, title, color, source
  */
 export default async function main(_req: Request) {
-  const result = await AppleCalender.getCalendarList();
+  const result = await getCalendarList();
   return Response.json({ result });
 }
