@@ -1713,8 +1713,61 @@
         "description": "Add a new reminder to Apple Reminders",
         "parameters": {
           "type": "object",
-          "properties": {},
-          "required": []
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "Reminder title"
+            },
+            "listId": {
+              "type": "string",
+              "description": "Reminder list ID to add to"
+            },
+            "notes": {
+              "type": "string",
+              "description": "Reminder notes/description"
+            },
+            "dueDate": {
+              "type": "string",
+              "description": "Due date in ISO 8601 format"
+            },
+            "priority": {
+              "type": "string",
+              "description": "Priority level: none, low, medium, high"
+            },
+            "recurrence": {
+              "type": "object",
+              "description": "Recurrence rule for repeating reminders"
+            },
+            "frequency": {
+              "type": "string",
+              "description": "Recurrence frequency: daily, weekly, monthly, yearly"
+            },
+            "interval": {
+              "type": "number",
+              "description": "Interval between occurrences"
+            },
+            "endDate": {
+              "type": "string",
+              "description": "End date for recurrence"
+            },
+            "address": {
+              "type": "string",
+              "description": "Location address for location-based reminder"
+            },
+            "proximity": {
+              "type": "string",
+              "description": "Proximity trigger: arrive or depart"
+            },
+            "radius": {
+              "type": "number",
+              "description": "Geofence radius in meters"
+            }
+          },
+          "required": [
+            "title",
+            "frequency",
+            "interval"
+          ]
         },
         "routePath": "apple-apps-and-services/reminders/add"
       },
@@ -1737,7 +1790,7 @@
       },
       {
         "name": "get_events",
-        "description": "Get all reminder items from Apple Reminders",
+        "description": "Get all incomplete reminder items from Apple Reminders",
         "parameters": {
           "type": "object",
           "properties": {},
@@ -1757,7 +1810,7 @@
       },
       {
         "name": "toggle_completion",
-        "description": "Toggle a reminder's completion status",
+        "description": "Toggle a reminder's completion status between complete and incomplete",
         "parameters": {
           "type": "object",
           "properties": {
@@ -1796,11 +1849,23 @@
             },
             "priority": {
               "type": "string",
-              "description": "Updated priority level"
+              "description": "Updated priority level: none, low, medium, high"
             },
             "recurrence": {
               "type": "object",
               "description": "Updated recurrence rule"
+            },
+            "frequency": {
+              "type": "string",
+              "description": "Recurrence frequency: daily, weekly, monthly, yearly"
+            },
+            "interval": {
+              "type": "number",
+              "description": "Interval between occurrences"
+            },
+            "endDate": {
+              "type": "string",
+              "description": "End date for recurrence"
             },
             "address": {
               "type": "string",
@@ -1808,15 +1873,17 @@
             },
             "proximity": {
               "type": "string",
-              "description": "Updated proximity trigger"
+              "description": "Updated proximity trigger: arrive or depart"
             },
             "radius": {
               "type": "number",
-              "description": "Updated geofence radius"
+              "description": "Updated geofence radius in meters"
             }
           },
           "required": [
-            "reminderId"
+            "reminderId",
+            "frequency",
+            "interval"
           ]
         },
         "routePath": "apple-apps-and-services/reminders/update"

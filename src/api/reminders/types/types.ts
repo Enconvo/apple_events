@@ -1,33 +1,51 @@
-
-// Define the Reminder interface
+/** Reminder item */
 export interface Reminder {
-    id: string;                // Unique identifier for the reminder
-    openUrl: string;           // URL to open the reminder
-    title: string;             // Title of the reminder
-    url?: string;              // Optional URL associated with the reminder
-    notes: string;             // Notes for the reminder
-    dueDate?: string;          // Optional due date in "yyyy-MM-dd HH:mm:ss" or "yyyy-MM-dd" format
-    isCompleted: boolean;      // Flag indicating if the reminder is completed
-    priority: string;          // Priority level of the reminder
-    completionDate: string;    // Completion date of the reminder
-    isRecurring: boolean;      // Flag indicating if the reminder is recurring
-    recurrenceRule: string;    // Recurrence rule for the reminder
-    list?: ReminderList;       // Optional list to which the reminder belongs
-    location?: Location;       // Optional location associated with the reminder
+    /** Unique identifier for the reminder */
+    id: string;
+    /** URL to open the reminder in Apple Reminders */
+    openUrl: string;
+    /** Title of the reminder */
+    title: string;
+    /** URL associated with the reminder */
+    url?: string;
+    /** Notes for the reminder */
+    notes: string;
+    /** Due date in "yyyy-MM-dd HH:mm:ss" or "yyyy-MM-dd" format */
+    dueDate?: string;
+    /** Whether the reminder is completed */
+    isCompleted: boolean;
+    /** Priority level: none, low, medium, high */
+    priority: string;
+    /** Completion date of the reminder */
+    completionDate: string;
+    /** Whether the reminder is recurring */
+    isRecurring: boolean;
+    /** Recurrence rule description */
+    recurrenceRule: string;
+    /** List to which the reminder belongs */
+    list?: ReminderList;
+    /** Location associated with the reminder */
+    location?: Location;
 }
 
-// Define the ReminderList interface
+/** Reminder list */
 export interface ReminderList {
-    id: string;                // Unique identifier for the list
-    title: string;             // Title of the list
-    color: string;             // Color associated with the list
-    isDefault: boolean;        // Flag indicating if the list is the default list
+    /** Unique identifier for the list */
+    id: string;
+    /** Title of the list */
+    title: string;
+    /** Color associated with the list */
+    color: string;
+    /** Whether this is the default list */
+    isDefault: boolean;
 }
 
-// Define the Location interface
-// Define the Location interface
+/** Location for location-based reminders */
 export interface Location {
-    address: string;           // Address of the location
-    proximity: string;         // Proximity type for location-based reminders
-    radius?: number;           // Optional radius for location-based reminders
+    /** Address of the location */
+    address: string;
+    /** Proximity trigger type: enter or leave */
+    proximity: string;
+    /** Geofence radius in meters */
+    radius?: number;
 }

@@ -79,9 +79,9 @@ Just use the `local_api` tool to request these APIs.
 | `apple-apps-and-services/notes/update_note_content` | Replace the content of a note and optionally rename it |
 | `apple-apps-and-services/reminders/add` | Add a new reminder to Apple Reminders |
 | `apple-apps-and-services/reminders/delete` | Delete a reminder by ID |
-| `apple-apps-and-services/reminders/get_events` | Get all reminder items from Apple Reminders |
+| `apple-apps-and-services/reminders/get_events` | Get all incomplete reminder items from Apple Reminders |
 | `apple-apps-and-services/reminders/get_lists` | Get all reminder lists from Apple Reminders |
-| `apple-apps-and-services/reminders/toggle_completion` | Toggle a reminder's completion status |
+| `apple-apps-and-services/reminders/toggle_completion` | Toggle a reminder's completion status between complete and incomplete |
 | `apple-apps-and-services/reminders/update` | Update an existing reminder's properties |
 
 
