@@ -15,11 +15,11 @@ Just use the `local_api` tool to request these APIs.
 
 | Endpoint | Description |
 |----------|-------------|
-| `apple-apps-and-services/calendar/add_event_to_apple_calender` | Add a new event to Apple Calendar |
-| `apple-apps-and-services/calendar/delete_calendar_event` | Delete a calendar event by ID |
-| `apple-apps-and-services/calendar/get_calendar_events` | Get upcoming calendar events for the specified number of days |
-| `apple-apps-and-services/calendar/get_calendar_list` | Get list of all calendars with details |
-| `apple-apps-and-services/calendar/update_calendar_event` | Update an existing calendar event |
+| `apple-apps-and-services/calendar/add_event` | Add a new event to Apple Calendar |
+| `apple-apps-and-services/calendar/delete_event` | Delete a calendar event by ID |
+| `apple-apps-and-services/calendar/get_events` | Get upcoming calendar events for the specified number of days |
+| `apple-apps-and-services/calendar/get_list` | Get list of all calendars with details |
+| `apple-apps-and-services/calendar/update_event` | Update an existing calendar event |
 | `apple-apps-and-services/contacts/find_contact_by_phone` | Find a contact by phone number |
 | `apple-apps-and-services/contacts/find_number` | Find phone numbers for a contact by name |
 | `apple-apps-and-services/contacts/list_all` | List all contacts with optional limit |
@@ -77,12 +77,12 @@ Just use the `local_api` tool to request these APIs.
 | `apple-apps-and-services/notes/move_note` | Move one or more notes to a different folder |
 | `apple-apps-and-services/notes/search_notes` | Search notes by title and optionally content with filters |
 | `apple-apps-and-services/notes/update_note_content` | Replace the content of a note and optionally rename it |
-| `apple-apps-and-services/reminders/add_event_to_apple_reminder` | Add a new reminder to Apple Reminders |
-| `apple-apps-and-services/reminders/delete_reminders_item` | Delete a reminder by ID |
-| `apple-apps-and-services/reminders/get_apple_reminders_events` | Get all reminder items from Apple Reminders |
-| `apple-apps-and-services/reminders/get_apple_reminders_lists` | Get all reminder lists from Apple Reminders |
-| `apple-apps-and-services/reminders/toggle_reminder_completion_status` | Toggle a reminder's completion status |
-| `apple-apps-and-services/reminders/update_reminders_item` | Update an existing reminder's properties |
+| `apple-apps-and-services/reminders/add` | Add a new reminder to Apple Reminders |
+| `apple-apps-and-services/reminders/delete` | Delete a reminder by ID |
+| `apple-apps-and-services/reminders/get_events` | Get all reminder items from Apple Reminders |
+| `apple-apps-and-services/reminders/get_lists` | Get all reminder lists from Apple Reminders |
+| `apple-apps-and-services/reminders/toggle_completion` | Toggle a reminder's completion status |
+| `apple-apps-and-services/reminders/update` | Update an existing reminder's properties |
 
 
 ## References

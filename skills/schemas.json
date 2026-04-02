@@ -5,7 +5,7 @@
     "description": "Router for calendar",
     "routes": [
       {
-        "name": "add_event_to_apple_calender",
+        "name": "add_event",
         "description": "Add a new event to Apple Calendar",
         "parameters": {
           "type": "object",
@@ -82,10 +82,10 @@
             "endDate"
           ]
         },
-        "routePath": "apple-apps-and-services/calendar/add_event_to_apple_calender"
+        "routePath": "apple-apps-and-services/calendar/add_event"
       },
       {
-        "name": "delete_calendar_event",
+        "name": "delete_event",
         "description": "Delete a calendar event by ID",
         "parameters": {
           "type": "object",
@@ -103,10 +103,10 @@
             "eventId"
           ]
         },
-        "routePath": "apple-apps-and-services/calendar/delete_calendar_event"
+        "routePath": "apple-apps-and-services/calendar/delete_event"
       },
       {
-        "name": "get_calendar_events",
+        "name": "get_events",
         "description": "Get upcoming calendar events for the specified number of days",
         "parameters": {
           "type": "object",
@@ -131,20 +131,20 @@
           },
           "required": []
         },
-        "routePath": "apple-apps-and-services/calendar/get_calendar_events"
+        "routePath": "apple-apps-and-services/calendar/get_events"
       },
       {
-        "name": "get_calendar_list",
+        "name": "get_list",
         "description": "Get list of all calendars with details",
         "parameters": {
           "type": "object",
           "properties": {},
           "required": []
         },
-        "routePath": "apple-apps-and-services/calendar/get_calendar_list"
+        "routePath": "apple-apps-and-services/calendar/get_list"
       },
       {
-        "name": "update_calendar_event",
+        "name": "update_event",
         "description": "Update an existing calendar event",
         "parameters": {
           "type": "object",
@@ -210,7 +210,7 @@
             "eventId"
           ]
         },
-        "routePath": "apple-apps-and-services/calendar/update_calendar_event"
+        "routePath": "apple-apps-and-services/calendar/update_event"
       }
     ]
   },
@@ -1709,17 +1709,17 @@
     "description": "Router for reminders",
     "routes": [
       {
-        "name": "add_event_to_apple_reminder",
+        "name": "add",
         "description": "Add a new reminder to Apple Reminders",
         "parameters": {
           "type": "object",
           "properties": {},
           "required": []
         },
-        "routePath": "apple-apps-and-services/reminders/add_event_to_apple_reminder"
+        "routePath": "apple-apps-and-services/reminders/add"
       },
       {
-        "name": "delete_reminders_item",
+        "name": "delete",
         "description": "Delete a reminder by ID",
         "parameters": {
           "type": "object",
@@ -1733,30 +1733,30 @@
             "reminderId"
           ]
         },
-        "routePath": "apple-apps-and-services/reminders/delete_reminders_item"
+        "routePath": "apple-apps-and-services/reminders/delete"
       },
       {
-        "name": "get_apple_reminders_events",
+        "name": "get_events",
         "description": "Get all reminder items from Apple Reminders",
         "parameters": {
           "type": "object",
           "properties": {},
           "required": []
         },
-        "routePath": "apple-apps-and-services/reminders/get_apple_reminders_events"
+        "routePath": "apple-apps-and-services/reminders/get_events"
       },
       {
-        "name": "get_apple_reminders_lists",
+        "name": "get_lists",
         "description": "Get all reminder lists from Apple Reminders",
         "parameters": {
           "type": "object",
           "properties": {},
           "required": []
         },
-        "routePath": "apple-apps-and-services/reminders/get_apple_reminders_lists"
+        "routePath": "apple-apps-and-services/reminders/get_lists"
       },
       {
-        "name": "toggle_reminder_completion_status",
+        "name": "toggle_completion",
         "description": "Toggle a reminder's completion status",
         "parameters": {
           "type": "object",
@@ -1770,10 +1770,10 @@
             "reminderId"
           ]
         },
-        "routePath": "apple-apps-and-services/reminders/toggle_reminder_completion_status"
+        "routePath": "apple-apps-and-services/reminders/toggle_completion"
       },
       {
-        "name": "update_reminders_item",
+        "name": "update",
         "description": "Update an existing reminder's properties",
         "parameters": {
           "type": "object",
@@ -1819,7 +1819,7 @@
             "reminderId"
           ]
         },
-        "routePath": "apple-apps-and-services/reminders/update_reminders_item"
+        "routePath": "apple-apps-and-services/reminders/update"
       }
     ]
   }
