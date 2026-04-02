@@ -6,6 +6,9 @@ import { Commander } from "@enconvo/api";
  */
 async function send(params: Record<string, any>): Promise<any> {
   const resp = await Commander.send("appleReminders", params);
+  if (resp.error) {
+    throw new Error(resp.error);
+  }
   return resp.data;
 }
 
