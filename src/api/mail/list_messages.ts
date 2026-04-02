@@ -29,9 +29,20 @@ export default async function main(req: Request) {
   const unreadOnly = params.unread_only || false;
   const fromFilter = params.from;
 
-  const accountRef = params.account
-    ? `account "${esc(params.account)}"`
-    : `first account`;
+  let targetBoxScript: string;
+  if (params.account) {
+    targetBoxScript = `set targetBox to mailbox "${esc(mailbox)}" of account "${esc(params.account)}"`;
+  } else {
+    targetBoxScript = `
+      set targetBox to missing value
+      repeat with acct in every account
+        try
+          set targetBox to mailbox "${esc(mailbox)}" of acct
+          exit repeat
+        end try
+      end repeat
+      if targetBox is missing value then error "Mailbox ${mailbox} not found"`;
+  }
 
   let whereClause = "";
   const conditions: string[] = [];
@@ -42,7 +53,7 @@ export default async function main(req: Request) {
   const script = `
     set output to ""
     tell application "Mail"
-      set targetBox to first mailbox of ${accountRef} whose name is "${esc(mailbox)}"
+      ${targetBoxScript}
       set msgs to (every message of targetBox${whereClause})
       set msgCount to count of msgs
       set startIdx to ${offset} + 1

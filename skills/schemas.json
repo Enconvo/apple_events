@@ -20,7 +20,7 @@
             },
             "endDate": {
               "type": "string",
-              "description": "End date for recurrence"
+              "description": "End date in ISO 8601 format"
             },
             "notes": {
               "type": "string",
@@ -60,20 +60,26 @@
             },
             "recurrence": {
               "type": "object",
-              "description": "Recurrence rule for repeating events"
-            },
-            "frequency": {
-              "type": "string",
-              "description": "Recurrence frequency: daily, weekly, monthly, yearly"
-            },
-            "interval": {
-              "type": "number",
-              "description": "Interval between occurrences",
-              "default": 1
-            },
-            "count": {
-              "type": "number",
-              "description": "Number of occurrences"
+              "description": "Recurrence rule for repeating events",
+              "properties": {
+                "frequency": {
+                  "type": "string",
+                  "description": "Recurrence frequency: daily, weekly, monthly, yearly"
+                },
+                "interval": {
+                  "type": "number",
+                  "description": "Interval between occurrences",
+                  "default": 1
+                },
+                "endDate": {
+                  "type": "string",
+                  "description": "End date for recurrence"
+                },
+                "count": {
+                  "type": "number",
+                  "description": "Number of occurrences"
+                }
+              }
             }
           },
           "required": [
@@ -228,6 +234,10 @@
             "phone_number": {
               "type": "string",
               "description": "Phone number to look up"
+            },
+            "phoneNumber": {
+              "type": "string",
+              "description": "Phone number to look up (alias for phone_number)"
             }
           },
           "required": [
@@ -245,6 +255,10 @@
             "contact_name": {
               "type": "string",
               "description": "Name of the contact to find phone numbers for"
+            },
+            "name": {
+              "type": "string",
+              "description": "Name of the contact (alias for contact_name)"
             }
           },
           "required": [
@@ -567,6 +581,16 @@
           ]
         },
         "routePath": "apple-apps-and-services/mail/get_message"
+      },
+      {
+        "name": "get_selected",
+        "description": "Get the currently selected messages in the Mail app",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "routePath": "apple-apps-and-services/mail/get_selected"
       },
       {
         "name": "get_unread_count",
@@ -1112,9 +1136,17 @@
               "type": "string",
               "description": "Starting address (omit for current location)"
             },
+            "from": {
+              "type": "string",
+              "description": "Starting address (alias for from_address)"
+            },
             "to_address": {
               "type": "string",
               "description": "Destination address"
+            },
+            "to": {
+              "type": "string",
+              "description": "Destination address (alias for to_address)"
             },
             "transport_type": {
               "type": "string",
@@ -1202,13 +1234,21 @@
       },
       {
         "name": "read_messages",
-        "description": "Read message history from a specific phone number",
+        "description": "Read message history from a specific phone number or chat ID",
         "parameters": {
           "type": "object",
           "properties": {
             "phone_number": {
               "type": "string",
-              "description": "Phone number to read messages from"
+              "description": "Phone number or chat ID to read messages from"
+            },
+            "phoneNumber": {
+              "type": "string",
+              "description": "Phone number (alias for phone_number)"
+            },
+            "chatId": {
+              "type": "string",
+              "description": "Chat ID (alias for phone_number)"
             },
             "limit": {
               "type": "number",
@@ -1503,6 +1543,16 @@
         "routePath": "apple-apps-and-services/notes/get_notes_stats"
       },
       {
+        "name": "get_selected",
+        "description": "Get the currently selected note in the Notes app",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "routePath": "apple-apps-and-services/notes/get_selected"
+      },
+      {
         "name": "list_accounts",
         "description": "List all Notes accounts with note and folder counts",
         "parameters": {
@@ -1678,13 +1728,25 @@
               "type": "string",
               "description": "Name of the note to update"
             },
+            "name": {
+              "type": "string",
+              "description": "Name of the note (alias for note_name)"
+            },
             "new_content": {
               "type": "string",
               "description": "New content for the note"
             },
+            "content": {
+              "type": "string",
+              "description": "Content (alias for new_content)"
+            },
             "new_title": {
               "type": "string",
               "description": "New title for the note (optional rename)"
+            },
+            "title": {
+              "type": "string",
+              "description": "New title (alias for new_title)"
             },
             "folder": {
               "type": "string",
@@ -1736,19 +1798,25 @@
             },
             "recurrence": {
               "type": "object",
-              "description": "Recurrence rule for repeating reminders"
-            },
-            "frequency": {
-              "type": "string",
-              "description": "Recurrence frequency: daily, weekly, monthly, yearly"
-            },
-            "interval": {
-              "type": "number",
-              "description": "Interval between occurrences"
-            },
-            "endDate": {
-              "type": "string",
-              "description": "End date for recurrence"
+              "description": "Recurrence rule for repeating reminders",
+              "properties": {
+                "frequency": {
+                  "type": "string",
+                  "description": "Recurrence frequency: daily, weekly, monthly, yearly"
+                },
+                "interval": {
+                  "type": "number",
+                  "description": "Interval between occurrences"
+                },
+                "endDate": {
+                  "type": "string",
+                  "description": "End date for recurrence"
+                }
+              },
+              "required": [
+                "frequency",
+                "interval"
+              ]
             },
             "address": {
               "type": "string",
@@ -1764,9 +1832,7 @@
             }
           },
           "required": [
-            "title",
-            "frequency",
-            "interval"
+            "title"
           ]
         },
         "routePath": "apple-apps-and-services/reminders/add"
@@ -1853,19 +1919,25 @@
             },
             "recurrence": {
               "type": "object",
-              "description": "Updated recurrence rule"
-            },
-            "frequency": {
-              "type": "string",
-              "description": "Recurrence frequency: daily, weekly, monthly, yearly"
-            },
-            "interval": {
-              "type": "number",
-              "description": "Interval between occurrences"
-            },
-            "endDate": {
-              "type": "string",
-              "description": "End date for recurrence"
+              "description": "Updated recurrence rule",
+              "properties": {
+                "frequency": {
+                  "type": "string",
+                  "description": "Recurrence frequency: daily, weekly, monthly, yearly"
+                },
+                "interval": {
+                  "type": "number",
+                  "description": "Interval between occurrences"
+                },
+                "endDate": {
+                  "type": "string",
+                  "description": "End date for recurrence"
+                }
+              },
+              "required": [
+                "frequency",
+                "interval"
+              ]
             },
             "address": {
               "type": "string",
@@ -1881,9 +1953,7 @@
             }
           },
           "required": [
-            "reminderId",
-            "frequency",
-            "interval"
+            "reminderId"
           ]
         },
         "routePath": "apple-apps-and-services/reminders/update"

@@ -1,6 +1,8 @@
 interface FindNumberParams {
   /** Name of the contact to find phone numbers for @required */
-  contact_name: string;
+  contact_name?: string;
+  /** Name of the contact (alias for contact_name) */
+  name?: string;
 }
 
 /**
@@ -10,10 +12,10 @@ interface FindNumberParams {
  */
 export default async function main(req: Request) {
   const params = await req.json() as FindNumberParams;
-  const { contact_name } = params;
+  const contact_name = params.contact_name || params.name;
 
   if (!contact_name) {
-    throw new Error("Contact name is required");
+    throw new Error("contact_name is required");
   }
 
   const { findNumber } = await import("./utils/contacts_util.ts");

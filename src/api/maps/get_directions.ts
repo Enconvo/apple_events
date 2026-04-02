@@ -1,8 +1,12 @@
 interface GetDirectionsParams {
   /** Starting address (omit for current location) */
   from_address?: string;
+  /** Starting address (alias for from_address) */
+  from?: string;
   /** Destination address @required */
-  to_address: string;
+  to_address?: string;
+  /** Destination address (alias for to_address) */
+  to?: string;
   /** Transport type @default "driving" */
   transport_type?: "driving" | "walking" | "transit";
 }
@@ -14,7 +18,9 @@ interface GetDirectionsParams {
  */
 export default async function main(req: Request) {
   const params = await req.json() as GetDirectionsParams;
-  const { from_address, to_address, transport_type } = params;
+  const from_address = params.from_address || params.from;
+  const to_address = params.to_address || params.to;
+  const transport_type = params.transport_type;
 
   if (!to_address) {
     throw new Error("Destination address (to_address) is required");

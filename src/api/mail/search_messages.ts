@@ -67,17 +67,28 @@ export default async function main(req: Request) {
       ? `{first mailbox of first account whose name is "${esc(params.mailbox)}"}`
       : `every mailbox of every account`;
 
-  // For a simple, reliable search: iterate messages in INBOX by default
   const targetMailbox = params.mailbox || "INBOX";
-  const accountRef = params.account
-    ? `account "${esc(params.account)}"`
-    : `first account`;
+
+  let targetBoxScript: string;
+  if (params.account) {
+    targetBoxScript = `set targetBox to mailbox "${esc(targetMailbox)}" of account "${esc(params.account)}"`;
+  } else {
+    targetBoxScript = `
+      set targetBox to missing value
+      repeat with acct in every account
+        try
+          set targetBox to mailbox "${esc(targetMailbox)}" of acct
+          exit repeat
+        end try
+      end repeat
+      if targetBox is missing value then error "Mailbox ${targetMailbox} not found"`;
+  }
 
   const script = `
     set output to ""
     set matchCount to 0
     tell application "Mail"
-      set targetBox to first mailbox of ${accountRef} whose name is "${esc(targetMailbox)}"
+      ${targetBoxScript}
       set allMsgs to every message of targetBox
       set totalMsgs to count of allMsgs
       repeat with i from 1 to totalMsgs
