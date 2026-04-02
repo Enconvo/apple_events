@@ -1,231 +1,1668 @@
 [
   {
-    "name": "add_event_to_apple_calender",
-    "title": "Add To Apple Calendar",
-    "description": "Add an event to Apple Calendar.",
-    "routePath": "calender/add_event_to_apple_calender",
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "input_text": {
-          "type": "string",
-          "description": "The natural language description of the event"
+    "name": "calendar",
+    "title": "calendar",
+    "description": "Router for calendar",
+    "routes": [
+      {
+        "name": "add_event_to_apple_calender",
+        "description": "Add a new event to Apple Calendar",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
         },
-        "title": {
-          "type": "string",
-          "description": "The title of the calendar event"
+        "routePath": "apple-apps-and-services/calendar/add_event_to_apple_calender"
+      },
+      {
+        "name": "delete_calendar_event",
+        "description": "Delete a calendar event by ID",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
         },
-        "startDate": {
-          "type": "string",
-          "description": "Start date and time in format 'yyyy-MM-dd HH:mm:ss'"
+        "routePath": "apple-apps-and-services/calendar/delete_calendar_event"
+      },
+      {
+        "name": "get_calendar_events",
+        "description": "Get upcoming calendar events for the specified number of days",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
         },
-        "endDate": {
-          "type": "string",
-          "description": "End date and time in format 'yyyy-MM-dd HH:mm:ss'"
+        "routePath": "apple-apps-and-services/calendar/get_calendar_events"
+      },
+      {
+        "name": "get_calendar_list",
+        "description": "Get list of all calendars with name and description",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
         },
-        "notes": {
-          "type": "string",
-          "description": "Additional notes or description for the event"
+        "routePath": "apple-apps-and-services/calendar/get_calendar_list"
+      },
+      {
+        "name": "update_calendar_event",
+        "description": "Update an existing calendar event",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
         },
-        "isAllDay": {
-          "type": "boolean",
-          "description": "Whether this is an all-day event",
-          "default": false
-        },
-        "url": {
-          "type": "string",
-          "description": "URL associated with the event"
-        },
-        "location": {
-          "type": "string",
-          "description": "Location of the event"
-        },
-        "calendarId": {
-          "type": "string",
-          "description": "ID of calendar to add event to, uses default if not specified"
-        },
-        "availability": {
-          "type": "integer",
-          "description": "Event availability status (0: free, 1: busy, etc)"
-        },
-        "alarms": {
-          "type": "array",
-          "items": {
-            "type": "number"
-          },
-          "description": "Array of alarm offset times in seconds before event (negative values, e.g. -3600 for 1 hour before)"
-        },
-        "recurrence": {
+        "routePath": "apple-apps-and-services/calendar/update_calendar_event"
+      }
+    ]
+  },
+  {
+    "name": "contacts",
+    "title": "contacts",
+    "description": "Router for contacts",
+    "routes": [
+      {
+        "name": "find_contact_by_phone",
+        "description": "Find a contact by phone number",
+        "parameters": {
           "type": "object",
           "properties": {
-            "frequency": {
+            "phone_number": {
               "type": "string",
-              "enum": [
-                "daily",
-                "weekly",
-                "monthly",
-                "yearly"
-              ],
-              "description": "Frequency of event recurrence"
-            },
-            "interval": {
-              "type": "integer",
-              "description": "Repeat every X days/weeks/months/years"
-            },
-            "endDate": {
-              "type": "string",
-              "description": "End date for recurrence in format 'yyyy-MM-dd HH:mm:ss'"
-            },
-            "count": {
-              "type": "integer",
-              "description": "Number of occurrences"
+              "description": "Phone number to look up"
             }
           },
-          "description": "Recurrence rule for repeating events"
-        }
+          "required": [
+            "phone_number"
+          ]
+        },
+        "routePath": "apple-apps-and-services/contacts/find_contact_by_phone"
       },
-      "required": [
-        "title",
-        "startDate",
-        "endDate"
-      ]
-    }
-  },
-  {
-    "name": "update_calendar_event",
-    "title": "Update Calendar Event",
-    "description": "Update an event to Apple Calendar.",
-    "routePath": "calender/update_calendar_event",
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "input_text": {
-          "type": "string",
-          "description": "The natural language description of the event"
-        },
-        "eventId": {
-          "type": "string",
-          "description": "The ID of the event to update"
-        },
-        "title": {
-          "type": "string",
-          "description": "The title of the calendar event"
-        },
-        "startDate": {
-          "type": "string",
-          "description": "Start date and time in format 'yyyy-MM-dd HH:mm:ss'"
-        },
-        "endDate": {
-          "type": "string",
-          "description": "End date and time in format 'yyyy-MM-dd HH:mm:ss'"
-        },
-        "notes": {
-          "type": "string",
-          "description": "Additional notes or description for the event"
-        },
-        "isAllDay": {
-          "type": "boolean",
-          "description": "Whether this is an all-day event",
-          "default": false
-        },
-        "url": {
-          "type": "string",
-          "description": "URL associated with the event"
-        },
-        "location": {
-          "type": "string",
-          "description": "Location of the event"
-        },
-        "calendarId": {
-          "type": "string",
-          "description": "ID of calendar to add event to, uses default if not specified"
-        },
-        "availability": {
-          "type": "integer",
-          "description": "Event availability status (0: free, 1: busy, etc)"
-        },
-        "alarms": {
-          "type": "array",
-          "items": {
-            "type": "number"
-          },
-          "description": "Array of alarm offset times in seconds before event (negative values, e.g. -3600 for 1 hour before)"
-        },
-        "recurrence": {
+      {
+        "name": "find_number",
+        "description": "Find phone numbers for a contact by name",
+        "parameters": {
           "type": "object",
           "properties": {
-            "frequency": {
+            "contact_name": {
               "type": "string",
-              "enum": [
-                "daily",
-                "weekly",
-                "monthly",
-                "yearly"
-              ],
-              "description": "Frequency of event recurrence"
-            },
-            "interval": {
-              "type": "integer",
-              "description": "Repeat every X days/weeks/months/years"
-            },
-            "endDate": {
-              "type": "string",
-              "description": "End date for recurrence in format 'yyyy-MM-dd HH:mm:ss'"
-            },
-            "count": {
-              "type": "integer",
-              "description": "Number of occurrences"
+              "description": "Name of the contact to find phone numbers for"
             }
           },
-          "description": "Recurrence rule for repeating events"
-        }
-      },
-      "required": [
-        "eventId",
-        "title",
-        "startDate",
-        "endDate"
-      ]
-    }
-  },
-  {
-    "name": "get_calendar_events",
-    "title": "Get Calendar Events",
-    "description": "Get calendar events.",
-    "routePath": "calender/get_calendar_events",
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "days": {
-          "type": "number",
-          "description": "The number of days to get events for"
-        }
-      }
-    }
-  },
-  {
-    "name": "delete_calendar_event",
-    "title": "Delete Calendar Event",
-    "description": "Delete calendar event.",
-    "routePath": "calender/delete_calendar_event",
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "eventId": {
-          "type": "string",
-          "description": "The ID of the event to delete"
+          "required": [
+            "contact_name"
+          ]
         },
-        "deleteAllRecurrences": {
-          "type": "boolean",
-          "description": "Whether to delete all recurrence events, default is false"
-        }
+        "routePath": "apple-apps-and-services/contacts/find_number"
+      },
+      {
+        "name": "list_all",
+        "description": "List all contacts with optional limit",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "limit": {
+              "type": "number",
+              "description": "Maximum number of contacts to return",
+              "default": 50
+            }
+          },
+          "required": []
+        },
+        "routePath": "apple-apps-and-services/contacts/list_all"
+      },
+      {
+        "name": "search_contacts",
+        "description": "Search contacts by name, phone, or email",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "Search query (name, phone, or email)"
+            }
+          },
+          "required": [
+            "query"
+          ]
+        },
+        "routePath": "apple-apps-and-services/contacts/search_contacts"
       }
-    }
+    ]
   },
   {
-    "name": "get_calendar_list",
-    "title": "Get Calendar List",
-    "description": "Get calendar list.",
-    "routePath": "calender/get_calendar_list"
+    "name": "mail",
+    "title": "mail",
+    "description": "Router for mail",
+    "routes": [
+      {
+        "name": "create_draft",
+        "description": "Create an email draft with recipients and content",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "to": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": ""
+              },
+              "description": "Recipient email addresses"
+            },
+            "subject": {
+              "type": "string",
+              "description": "Email subject"
+            },
+            "body": {
+              "type": "string",
+              "description": "Email body"
+            },
+            "cc": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": ""
+              },
+              "description": "CC recipients"
+            },
+            "bcc": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": ""
+              },
+              "description": "BCC recipients"
+            },
+            "account": {
+              "type": "string",
+              "description": "Account to create draft in"
+            }
+          },
+          "required": [
+            "to",
+            "subject",
+            "body"
+          ]
+        },
+        "routePath": "apple-apps-and-services/mail/create_draft"
+      },
+      {
+        "name": "create_mailbox",
+        "description": "Create a new mailbox in a mail account",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name of the new mailbox"
+            },
+            "account": {
+              "type": "string",
+              "description": "Account to create the mailbox in"
+            }
+          },
+          "required": [
+            "name"
+          ]
+        },
+        "routePath": "apple-apps-and-services/mail/create_mailbox"
+      },
+      {
+        "name": "delete_mailbox",
+        "description": "Delete a mailbox from a mail account",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name of the mailbox to delete"
+            },
+            "account": {
+              "type": "string",
+              "description": "Account containing the mailbox"
+            }
+          },
+          "required": [
+            "name"
+          ]
+        },
+        "routePath": "apple-apps-and-services/mail/delete_mailbox"
+      },
+      {
+        "name": "delete_message",
+        "description": "Delete one or more messages (moves to Trash)",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "ids": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "description": ""
+              },
+              "description": "Message ID or array of IDs"
+            },
+            "account": {
+              "type": "string",
+              "description": "Account name"
+            },
+            "mailbox": {
+              "type": "string",
+              "description": "Mailbox name"
+            }
+          },
+          "required": [
+            "ids",
+            "account",
+            "mailbox"
+          ]
+        },
+        "routePath": "apple-apps-and-services/mail/delete_message"
+      },
+      {
+        "name": "disable_rule",
+        "description": "Disable a mail rule by name",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Rule name"
+            }
+          },
+          "required": [
+            "name"
+          ]
+        },
+        "routePath": "apple-apps-and-services/mail/disable_rule"
+      },
+      {
+        "name": "enable_rule",
+        "description": "Enable a mail rule by name",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Rule name"
+            }
+          },
+          "required": [
+            "name"
+          ]
+        },
+        "routePath": "apple-apps-and-services/mail/enable_rule"
+      },
+      {
+        "name": "flag_message",
+        "description": "Flag one or more messages",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "ids": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "description": ""
+              },
+              "description": "Message ID or array of IDs"
+            },
+            "account": {
+              "type": "string",
+              "description": "Account name"
+            },
+            "mailbox": {
+              "type": "string",
+              "description": "Mailbox name"
+            }
+          },
+          "required": [
+            "ids",
+            "account",
+            "mailbox"
+          ]
+        },
+        "routePath": "apple-apps-and-services/mail/flag_message"
+      },
+      {
+        "name": "forward_message",
+        "description": "Forward a message to recipients with optional body prepend",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Message ID (numeric)"
+            },
+            "account": {
+              "type": "string",
+              "description": "Account name"
+            },
+            "mailbox": {
+              "type": "string",
+              "description": "Mailbox name"
+            },
+            "to": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": ""
+              },
+              "description": "Recipient email addresses"
+            },
+            "body": {
+              "type": "string",
+              "description": "Message to prepend"
+            },
+            "send": {
+              "type": "boolean",
+              "description": "Send immediately or save as draft",
+              "default": true
+            }
+          },
+          "required": [
+            "id",
+            "account",
+            "mailbox",
+            "to"
+          ]
+        },
+        "routePath": "apple-apps-and-services/mail/forward_message"
+      },
+      {
+        "name": "get_mail_stats",
+        "description": "Get per-account inbox statistics including total and unread message counts",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "routePath": "apple-apps-and-services/mail/get_mail_stats"
+      },
+      {
+        "name": "get_message",
+        "description": "Get full message content including recipients and CC",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Message ID (numeric)"
+            },
+            "account": {
+              "type": "string",
+              "description": "Account name"
+            },
+            "mailbox": {
+              "type": "string",
+              "description": "Mailbox name"
+            },
+            "prefer_html": {
+              "type": "boolean",
+              "description": "Return HTML source instead of plain text"
+            }
+          },
+          "required": [
+            "id",
+            "account",
+            "mailbox"
+          ]
+        },
+        "routePath": "apple-apps-and-services/mail/get_message"
+      },
+      {
+        "name": "get_unread_count",
+        "description": "Get unread message count for a mailbox, summing across accounts if no account specified",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "mailbox": {
+              "type": "string",
+              "description": "Mailbox name (defaults to INBOX)"
+            },
+            "account": {
+              "type": "string",
+              "description": "Account name"
+            }
+          },
+          "required": []
+        },
+        "routePath": "apple-apps-and-services/mail/get_unread_count"
+      },
+      {
+        "name": "list_accounts",
+        "description": "List all mail accounts with name, email, and full name",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "routePath": "apple-apps-and-services/mail/list_accounts"
+      },
+      {
+        "name": "list_attachments",
+        "description": "List attachments of a specific email message",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Message ID (numeric)"
+            },
+            "account": {
+              "type": "string",
+              "description": "Account name"
+            },
+            "mailbox": {
+              "type": "string",
+              "description": "Mailbox name"
+            }
+          },
+          "required": [
+            "id",
+            "account",
+            "mailbox"
+          ]
+        },
+        "routePath": "apple-apps-and-services/mail/list_attachments"
+      },
+      {
+        "name": "list_mailboxes",
+        "description": "List mailboxes with unread counts, optionally filtered by account",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "account": {
+              "type": "string",
+              "description": "Account name to list mailboxes from"
+            }
+          },
+          "required": []
+        },
+        "routePath": "apple-apps-and-services/mail/list_mailboxes"
+      },
+      {
+        "name": "list_messages",
+        "description": "List messages in a mailbox with pagination and filters",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "mailbox": {
+              "type": "string",
+              "description": "Mailbox name (defaults to INBOX)"
+            },
+            "account": {
+              "type": "string",
+              "description": "Account name"
+            },
+            "limit": {
+              "type": "number",
+              "description": "Maximum number of messages",
+              "default": 20
+            },
+            "offset": {
+              "type": "number",
+              "description": "Number of messages to skip",
+              "default": 0
+            },
+            "from": {
+              "type": "string",
+              "description": "Filter by sender email or name"
+            },
+            "unread_only": {
+              "type": "boolean",
+              "description": "Only show unread messages"
+            }
+          },
+          "required": []
+        },
+        "routePath": "apple-apps-and-services/mail/list_messages"
+      },
+      {
+        "name": "list_rules",
+        "description": "List all mail rules with enabled status",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "routePath": "apple-apps-and-services/mail/list_rules"
+      },
+      {
+        "name": "mark_as_read",
+        "description": "Mark one or more messages as read",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "ids": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "description": ""
+              },
+              "description": "Message ID or array of IDs"
+            },
+            "account": {
+              "type": "string",
+              "description": "Account name"
+            },
+            "mailbox": {
+              "type": "string",
+              "description": "Mailbox name"
+            }
+          },
+          "required": [
+            "ids",
+            "account",
+            "mailbox"
+          ]
+        },
+        "routePath": "apple-apps-and-services/mail/mark_as_read"
+      },
+      {
+        "name": "mark_as_unread",
+        "description": "Mark one or more messages as unread",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "ids": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "description": ""
+              },
+              "description": "Message ID or array of IDs"
+            },
+            "account": {
+              "type": "string",
+              "description": "Account name"
+            },
+            "mailbox": {
+              "type": "string",
+              "description": "Mailbox name"
+            }
+          },
+          "required": [
+            "ids",
+            "account",
+            "mailbox"
+          ]
+        },
+        "routePath": "apple-apps-and-services/mail/mark_as_unread"
+      },
+      {
+        "name": "move_message",
+        "description": "Move one or more messages to a different mailbox",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "ids": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "description": ""
+              },
+              "description": "Message ID or array of IDs"
+            },
+            "account": {
+              "type": "string",
+              "description": "Source account name"
+            },
+            "mailbox": {
+              "type": "string",
+              "description": "Source mailbox name"
+            },
+            "to_mailbox": {
+              "type": "string",
+              "description": "Destination mailbox name"
+            },
+            "to_account": {
+              "type": "string",
+              "description": "Destination account (if different from source)"
+            }
+          },
+          "required": [
+            "ids",
+            "account",
+            "mailbox",
+            "to_mailbox"
+          ]
+        },
+        "routePath": "apple-apps-and-services/mail/move_message"
+      },
+      {
+        "name": "rename_mailbox",
+        "description": "Rename an existing mailbox",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "old_name": {
+              "type": "string",
+              "description": "Current mailbox name"
+            },
+            "new_name": {
+              "type": "string",
+              "description": "New mailbox name"
+            },
+            "account": {
+              "type": "string",
+              "description": "Account containing the mailbox"
+            }
+          },
+          "required": [
+            "old_name",
+            "new_name"
+          ]
+        },
+        "routePath": "apple-apps-and-services/mail/rename_mailbox"
+      },
+      {
+        "name": "reply_to_message",
+        "description": "Reply to a message with optional reply-all and send/draft options",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Message ID (numeric)"
+            },
+            "account": {
+              "type": "string",
+              "description": "Account name"
+            },
+            "mailbox": {
+              "type": "string",
+              "description": "Mailbox name"
+            },
+            "body": {
+              "type": "string",
+              "description": "Reply body"
+            },
+            "reply_all": {
+              "type": "boolean",
+              "description": "Reply to all recipients",
+              "default": false
+            },
+            "send": {
+              "type": "boolean",
+              "description": "Send immediately or save as draft",
+              "default": true
+            }
+          },
+          "required": [
+            "id",
+            "account",
+            "mailbox",
+            "body"
+          ]
+        },
+        "routePath": "apple-apps-and-services/mail/reply_to_message"
+      },
+      {
+        "name": "save_attachment",
+        "description": "Save an email attachment to disk",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Message ID (numeric)"
+            },
+            "account": {
+              "type": "string",
+              "description": "Account name"
+            },
+            "mailbox": {
+              "type": "string",
+              "description": "Mailbox name"
+            },
+            "attachment_name": {
+              "type": "string",
+              "description": "Attachment name"
+            },
+            "save_path": {
+              "type": "string",
+              "description": "Directory to save to",
+              "default": "~/Desktop"
+            }
+          },
+          "required": [
+            "id",
+            "account",
+            "mailbox",
+            "attachment_name"
+          ]
+        },
+        "routePath": "apple-apps-and-services/mail/save_attachment"
+      },
+      {
+        "name": "search_messages",
+        "description": "Search messages with query, sender, subject, date, and status filters",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "Text to search in subject, sender, or content"
+            },
+            "from": {
+              "type": "string",
+              "description": "Filter by sender email address or name"
+            },
+            "subject": {
+              "type": "string",
+              "description": "Filter by subject line"
+            },
+            "mailbox": {
+              "type": "string",
+              "description": "Mailbox to search in"
+            },
+            "account": {
+              "type": "string",
+              "description": "Account to search in"
+            },
+            "is_read": {
+              "type": "boolean",
+              "description": "Filter by read status"
+            },
+            "is_flagged": {
+              "type": "boolean",
+              "description": "Filter by flagged status"
+            },
+            "date_from": {
+              "type": "string",
+              "description": "Start date (YYYY-MM-DD)"
+            },
+            "date_to": {
+              "type": "string",
+              "description": "End date (YYYY-MM-DD)"
+            },
+            "limit": {
+              "type": "number",
+              "description": "Maximum number of results",
+              "default": 20
+            }
+          },
+          "required": []
+        },
+        "routePath": "apple-apps-and-services/mail/search_messages"
+      },
+      {
+        "name": "send_email",
+        "description": "Send an email with optional CC, BCC, and attachments",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "to": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": ""
+              },
+              "description": "Recipient email addresses"
+            },
+            "subject": {
+              "type": "string",
+              "description": "Email subject"
+            },
+            "body": {
+              "type": "string",
+              "description": "Email body"
+            },
+            "cc": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": ""
+              },
+              "description": "CC recipients"
+            },
+            "bcc": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": ""
+              },
+              "description": "BCC recipients"
+            },
+            "account": {
+              "type": "string",
+              "description": "Account to send from"
+            },
+            "attachments": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": ""
+              },
+              "description": "File paths to attach (max 20)"
+            }
+          },
+          "required": [
+            "to",
+            "subject",
+            "body"
+          ]
+        },
+        "routePath": "apple-apps-and-services/mail/send_email"
+      },
+      {
+        "name": "unflag_message",
+        "description": "Remove flag from one or more messages",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "ids": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "description": ""
+              },
+              "description": "Message ID or array of IDs"
+            },
+            "account": {
+              "type": "string",
+              "description": "Account name"
+            },
+            "mailbox": {
+              "type": "string",
+              "description": "Mailbox name"
+            }
+          },
+          "required": [
+            "ids",
+            "account",
+            "mailbox"
+          ]
+        },
+        "routePath": "apple-apps-and-services/mail/unflag_message"
+      }
+    ]
+  },
+  {
+    "name": "maps",
+    "title": "maps",
+    "description": "Router for maps",
+    "routes": [
+      {
+        "name": "add_to_guide",
+        "description": "Add a location to an existing guide in Apple Maps",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "guide_name": {
+              "type": "string",
+              "description": "Name of the guide to add the location to"
+            },
+            "location_query": {
+              "type": "string",
+              "description": "Location search query"
+            }
+          },
+          "required": [
+            "guide_name",
+            "location_query"
+          ]
+        },
+        "routePath": "apple-apps-and-services/maps/add_to_guide"
+      },
+      {
+        "name": "create_guide",
+        "description": "Create a new guide in Apple Maps",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name for the new guide"
+            }
+          },
+          "required": [
+            "name"
+          ]
+        },
+        "routePath": "apple-apps-and-services/maps/create_guide"
+      },
+      {
+        "name": "drop_pin",
+        "description": "Drop a pin at a location in Apple Maps",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "address": {
+              "type": "string",
+              "description": "Address or location to drop a pin at"
+            },
+            "label": {
+              "type": "string",
+              "description": "Optional label for the pin"
+            }
+          },
+          "required": [
+            "address"
+          ]
+        },
+        "routePath": "apple-apps-and-services/maps/drop_pin"
+      },
+      {
+        "name": "get_directions",
+        "description": "Get directions between two locations in Apple Maps",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "from_address": {
+              "type": "string",
+              "description": "Starting address (omit for current location)"
+            },
+            "to_address": {
+              "type": "string",
+              "description": "Destination address"
+            },
+            "transport_type": {
+              "type": "string",
+              "description": "Transport type (supported values: driving, walking, transit)",
+              "default": "driving"
+            }
+          },
+          "required": [
+            "to_address"
+          ]
+        },
+        "routePath": "apple-apps-and-services/maps/get_directions"
+      },
+      {
+        "name": "list_guides",
+        "description": "List all guides in Apple Maps",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "routePath": "apple-apps-and-services/maps/list_guides"
+      },
+      {
+        "name": "save_location",
+        "description": "Save a location as a favorite in Apple Maps",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name to save the location as"
+            },
+            "address": {
+              "type": "string",
+              "description": "Address of the location"
+            }
+          },
+          "required": [
+            "name",
+            "address"
+          ]
+        },
+        "routePath": "apple-apps-and-services/maps/save_location"
+      },
+      {
+        "name": "search_locations",
+        "description": "Search for locations in Apple Maps",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "Search query for locations"
+            }
+          },
+          "required": [
+            "query"
+          ]
+        },
+        "routePath": "apple-apps-and-services/maps/search_locations"
+      }
+    ]
+  },
+  {
+    "name": "messages",
+    "title": "messages",
+    "description": "Router for messages",
+    "routes": [
+      {
+        "name": "get_unread_messages",
+        "description": "Get recent unread iMessages",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "limit": {
+              "type": "number",
+              "description": "Maximum number of unread messages to return",
+              "default": 10
+            }
+          },
+          "required": []
+        },
+        "routePath": "apple-apps-and-services/messages/get_unread_messages"
+      },
+      {
+        "name": "read_messages",
+        "description": "Read message history from a specific phone number",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "phone_number": {
+              "type": "string",
+              "description": "Phone number to read messages from"
+            },
+            "limit": {
+              "type": "number",
+              "description": "Maximum number of messages to return",
+              "default": 10
+            }
+          },
+          "required": [
+            "phone_number"
+          ]
+        },
+        "routePath": "apple-apps-and-services/messages/read_messages"
+      },
+      {
+        "name": "schedule_message",
+        "description": "Schedule an iMessage to be sent at a future time",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "recipient": {
+              "type": "string",
+              "description": "Phone number or email of the recipient"
+            },
+            "message": {
+              "type": "string",
+              "description": "Message content to send"
+            },
+            "scheduled_time": {
+              "type": "string",
+              "description": "ISO 8601 date string for when to send the message"
+            }
+          },
+          "required": [
+            "recipient",
+            "message",
+            "scheduled_time"
+          ]
+        },
+        "routePath": "apple-apps-and-services/messages/schedule_message"
+      },
+      {
+        "name": "send_message",
+        "description": "Send an iMessage to a recipient",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "recipient": {
+              "type": "string",
+              "description": "Phone number or email of the recipient"
+            },
+            "message": {
+              "type": "string",
+              "description": "Message content to send"
+            }
+          },
+          "required": [
+            "recipient",
+            "message"
+          ]
+        },
+        "routePath": "apple-apps-and-services/messages/send_message"
+      }
+    ]
+  },
+  {
+    "name": "notes",
+    "title": "notes",
+    "description": "Router for notes",
+    "routes": [
+      {
+        "name": "add_note",
+        "description": "Create a new note in Apple Notes",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name/title of the new note"
+            },
+            "content": {
+              "type": "string",
+              "description": "Content of the new note"
+            },
+            "folder": {
+              "type": "string",
+              "description": "Folder to create the note in",
+              "default": "Notes"
+            },
+            "account": {
+              "type": "string",
+              "description": "Account to create the note in"
+            }
+          },
+          "required": [
+            "name",
+            "content"
+          ]
+        },
+        "routePath": "apple-apps-and-services/notes/add_note"
+      },
+      {
+        "name": "append_to_note",
+        "description": "Append content to an existing note without replacing",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Note ID (preferred over note_name)"
+            },
+            "note_name": {
+              "type": "string",
+              "description": "Name of the note to append to"
+            },
+            "content": {
+              "type": "string",
+              "description": "Content to append to the note"
+            },
+            "folder": {
+              "type": "string",
+              "description": "Optional folder name where the note is located"
+            },
+            "account": {
+              "type": "string",
+              "description": "Account containing the note"
+            }
+          },
+          "required": [
+            "content"
+          ]
+        },
+        "routePath": "apple-apps-and-services/notes/append_to_note"
+      },
+      {
+        "name": "create_folder",
+        "description": "Create a new folder in Apple Notes",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Folder name"
+            },
+            "account": {
+              "type": "string",
+              "description": "Account to create the folder in"
+            }
+          },
+          "required": [
+            "name"
+          ]
+        },
+        "routePath": "apple-apps-and-services/notes/create_folder"
+      },
+      {
+        "name": "delete_folder",
+        "description": "Delete a folder from Apple Notes",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Folder name to delete"
+            },
+            "account": {
+              "type": "string",
+              "description": "Account containing the folder"
+            }
+          },
+          "required": [
+            "name"
+          ]
+        },
+        "routePath": "apple-apps-and-services/notes/delete_folder"
+      },
+      {
+        "name": "delete_note",
+        "description": "Delete one or more notes by id, name, or batch ids",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Note ID (preferred over note_name)"
+            },
+            "ids": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": ""
+              },
+              "description": "Note IDs for batch delete"
+            },
+            "note_name": {
+              "type": "string",
+              "description": "Name of the note to delete"
+            },
+            "folder": {
+              "type": "string",
+              "description": "Optional folder name where the note is located"
+            },
+            "account": {
+              "type": "string",
+              "description": "Account containing the note"
+            }
+          },
+          "required": []
+        },
+        "routePath": "apple-apps-and-services/notes/delete_note"
+      },
+      {
+        "name": "get_note_content",
+        "description": "Get the full HTML body of a note by id or name",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Note ID (preferred over note_name)"
+            },
+            "note_name": {
+              "type": "string",
+              "description": "Name of the note to retrieve"
+            },
+            "folder": {
+              "type": "string",
+              "description": "Optional folder name where the note is located"
+            },
+            "account": {
+              "type": "string",
+              "description": "Account containing the note"
+            }
+          },
+          "required": []
+        },
+        "routePath": "apple-apps-and-services/notes/get_note_content"
+      },
+      {
+        "name": "get_note_details",
+        "description": "Get note metadata without content (folder, dates, attachment count, length)",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Note ID (preferred over note_name)"
+            },
+            "note_name": {
+              "type": "string",
+              "description": "Note title"
+            },
+            "account": {
+              "type": "string",
+              "description": "Account containing the note"
+            }
+          },
+          "required": []
+        },
+        "routePath": "apple-apps-and-services/notes/get_note_details"
+      },
+      {
+        "name": "get_note_markdown",
+        "description": "Convert a note's content to markdown format",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Note ID (preferred over note_name)"
+            },
+            "note_name": {
+              "type": "string",
+              "description": "Note title"
+            },
+            "account": {
+              "type": "string",
+              "description": "Account containing the note"
+            }
+          },
+          "required": []
+        },
+        "routePath": "apple-apps-and-services/notes/get_note_markdown"
+      },
+      {
+        "name": "get_notes_stats",
+        "description": "Get total notes/folders count and per-account breakdown",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "routePath": "apple-apps-and-services/notes/get_notes_stats"
+      },
+      {
+        "name": "list_accounts",
+        "description": "List all Notes accounts with note and folder counts",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "routePath": "apple-apps-and-services/notes/list_accounts"
+      },
+      {
+        "name": "list_attachments",
+        "description": "List attachments of a specific note",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Note ID (preferred over note_name)"
+            },
+            "note_name": {
+              "type": "string",
+              "description": "Note title"
+            },
+            "account": {
+              "type": "string",
+              "description": "Account containing the note"
+            }
+          },
+          "required": []
+        },
+        "routePath": "apple-apps-and-services/notes/list_attachments"
+      },
+      {
+        "name": "list_folders",
+        "description": "List all folders in Apple Notes with note counts",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "account": {
+              "type": "string",
+              "description": "Account to list folders from"
+            }
+          },
+          "required": []
+        },
+        "routePath": "apple-apps-and-services/notes/list_folders"
+      },
+      {
+        "name": "list_notes",
+        "description": "List notes with optional folder, account, date, and limit filters",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "folder": {
+              "type": "string",
+              "description": "Optional folder name to filter notes"
+            },
+            "account": {
+              "type": "string",
+              "description": "Account to list notes from"
+            },
+            "modified_since": {
+              "type": "string",
+              "description": "Only return notes modified after this ISO date (YYYY-MM-DD)"
+            },
+            "limit": {
+              "type": "number",
+              "description": "Maximum number of notes to return",
+              "default": 20
+            }
+          },
+          "required": []
+        },
+        "routePath": "apple-apps-and-services/notes/list_notes"
+      },
+      {
+        "name": "list_shared_notes",
+        "description": "List all shared/collaborative notes",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "routePath": "apple-apps-and-services/notes/list_shared_notes"
+      },
+      {
+        "name": "move_note",
+        "description": "Move one or more notes to a different folder",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Note ID (preferred over note_name)"
+            },
+            "ids": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": ""
+              },
+              "description": "Note IDs for batch move"
+            },
+            "note_name": {
+              "type": "string",
+              "description": "Name of the note to move"
+            },
+            "folder": {
+              "type": "string",
+              "description": "Destination folder"
+            },
+            "account": {
+              "type": "string",
+              "description": "Account containing the note/folder"
+            }
+          },
+          "required": [
+            "folder"
+          ]
+        },
+        "routePath": "apple-apps-and-services/notes/move_note"
+      },
+      {
+        "name": "search_notes",
+        "description": "Search notes by title and optionally content with filters",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "Search query to match against note titles and content"
+            },
+            "search_content": {
+              "type": "boolean",
+              "description": "Search note content in addition to titles",
+              "default": true
+            },
+            "folder": {
+              "type": "string",
+              "description": "Optional folder to limit search to"
+            },
+            "account": {
+              "type": "string",
+              "description": "Account to search in"
+            },
+            "modified_since": {
+              "type": "string",
+              "description": "Only return notes modified after this ISO date (YYYY-MM-DD)"
+            },
+            "limit": {
+              "type": "number",
+              "description": "Maximum number of results to return",
+              "default": 20
+            }
+          },
+          "required": [
+            "query"
+          ]
+        },
+        "routePath": "apple-apps-and-services/notes/search_notes"
+      },
+      {
+        "name": "update_note_content",
+        "description": "Replace the content of a note and optionally rename it",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Note ID (preferred over note_name)"
+            },
+            "note_name": {
+              "type": "string",
+              "description": "Name of the note to update"
+            },
+            "new_content": {
+              "type": "string",
+              "description": "New content for the note"
+            },
+            "new_title": {
+              "type": "string",
+              "description": "New title for the note (optional rename)"
+            },
+            "folder": {
+              "type": "string",
+              "description": "Optional folder name where the note is located"
+            },
+            "account": {
+              "type": "string",
+              "description": "Account containing the note"
+            }
+          },
+          "required": [
+            "new_content"
+          ]
+        },
+        "routePath": "apple-apps-and-services/notes/update_note_content"
+      }
+    ]
+  },
+  {
+    "name": "reminders",
+    "title": "reminders",
+    "description": "Router for reminders",
+    "routes": [
+      {
+        "name": "add_event_to_apple_reminder",
+        "description": "Add a new reminder to Apple Reminders",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "routePath": "apple-apps-and-services/reminders/add_event_to_apple_reminder"
+      },
+      {
+        "name": "delete_reminders_item",
+        "description": "Delete a reminder by ID",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "reminderId": {
+              "type": "string",
+              "description": "ID of the reminder to delete"
+            }
+          },
+          "required": [
+            "reminderId"
+          ]
+        },
+        "routePath": "apple-apps-and-services/reminders/delete_reminders_item"
+      },
+      {
+        "name": "get_apple_reminders_events",
+        "description": "Get all reminder items from Apple Reminders",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "routePath": "apple-apps-and-services/reminders/get_apple_reminders_events"
+      },
+      {
+        "name": "get_apple_reminders_lists",
+        "description": "Get all reminder lists from Apple Reminders",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "routePath": "apple-apps-and-services/reminders/get_apple_reminders_lists"
+      },
+      {
+        "name": "toggle_reminder_completion_status",
+        "description": "Toggle a reminder's completion status",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "reminderId": {
+              "type": "string",
+              "description": "ID of the reminder to toggle"
+            }
+          },
+          "required": [
+            "reminderId"
+          ]
+        },
+        "routePath": "apple-apps-and-services/reminders/toggle_reminder_completion_status"
+      },
+      {
+        "name": "update_reminders_item",
+        "description": "Update an existing reminder's properties",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "reminderId": {
+              "type": "string",
+              "description": "ID of the reminder to update"
+            },
+            "title": {
+              "type": "string",
+              "description": "Updated reminder title"
+            },
+            "notes": {
+              "type": "string",
+              "description": "Updated notes/description"
+            },
+            "dueDate": {
+              "type": "string",
+              "description": "Updated due date in ISO 8601 format"
+            },
+            "priority": {
+              "type": "string",
+              "description": "Updated priority level"
+            },
+            "recurrence": {
+              "type": "object",
+              "description": "Updated recurrence rule"
+            },
+            "address": {
+              "type": "string",
+              "description": "Updated location address"
+            },
+            "proximity": {
+              "type": "string",
+              "description": "Updated proximity trigger"
+            },
+            "radius": {
+              "type": "number",
+              "description": "Updated geofence radius"
+            }
+          },
+          "required": [
+            "reminderId"
+          ]
+        },
+        "routePath": "apple-apps-and-services/reminders/update_reminders_item"
+      }
+    ]
   }
 ]
