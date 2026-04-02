@@ -4,7 +4,7 @@ description: >
   Manage Apple apps via native macOS APIs -- Calendar, Contacts, Mail, Messages, Maps, Notes, and Reminders with full CRUD operations, search, batch actions, and multi-account support.
 metadata:
   author: Enconvo
-  version: "0.0.132"
+  version: "0.0.133"
 ---
 
 ## API Reference
@@ -18,7 +18,7 @@ Just use the `local_api` tool to request these APIs.
 | `apple-apps-and-services/calendar/add_event_to_apple_calender` | Add a new event to Apple Calendar |
 | `apple-apps-and-services/calendar/delete_calendar_event` | Delete a calendar event by ID |
 | `apple-apps-and-services/calendar/get_calendar_events` | Get upcoming calendar events for the specified number of days |
-| `apple-apps-and-services/calendar/get_calendar_list` | Get list of all calendars with name and description |
+| `apple-apps-and-services/calendar/get_calendar_list` | Get list of all calendars with details |
 | `apple-apps-and-services/calendar/update_calendar_event` | Update an existing calendar event |
 | `apple-apps-and-services/contacts/find_contact_by_phone` | Find a contact by phone number |
 | `apple-apps-and-services/contacts/find_number` | Find phone numbers for a contact by name |

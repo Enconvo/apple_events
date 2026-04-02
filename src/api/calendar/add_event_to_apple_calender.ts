@@ -1,9 +1,7 @@
-import { AppleCalender, RequestOptions } from "@enconvo/api";
+import { AppleCalender } from "@enconvo/api";
 
 /** Add event to Apple Calendar request params */
-interface AddEventToAppleCalenderOptions extends RequestOptions {
-  /** Raw input text for event creation */
-  input_text: string;
+interface AddEventParams {
   /** Event title @required */
   title: string;
   /** Start date in ISO 8601 format @required */
@@ -20,15 +18,17 @@ interface AddEventToAppleCalenderOptions extends RequestOptions {
   location?: string;
   /** Calendar ID to add the event to */
   calendarId?: string;
-  /** Availability status (0=busy, 1=free) */
-  availability?: number;
+  /** Calendar name to add the event to */
+  calendarName?: string;
+  /** Availability: busy, free, tentative, unavailable */
+  availability?: string;
   /** Alarm offsets in minutes before event */
   alarms?: number[];
   /** Recurrence rule for repeating events */
   recurrence?: {
-    /** Recurrence frequency */
-    frequency?: 'daily' | 'weekly' | 'monthly' | 'yearly';
-    /** Interval between occurrences */
+    /** Recurrence frequency: daily, weekly, monthly, yearly */
+    frequency?: string;
+    /** Interval between occurrences @default 1 */
     interval?: number;
     /** End date for recurrence */
     endDate?: string;
@@ -39,16 +39,16 @@ interface AddEventToAppleCalenderOptions extends RequestOptions {
 
 /**
  * Add a new event to Apple Calendar
- * @param {Request} req - Request object, body is {@link AddEventToAppleCalenderOptions}
- * @returns The created calendar event
+ * @param {Request} req - Request object, body is {@link AddEventParams}
+ * @returns The created calendar event with full details
  */
 export default async function main(req: Request) {
-  const options: AddEventToAppleCalenderOptions = await req.json()
+  const params = (await req.json()) as AddEventParams;
 
-  //@ts-ignore
-  const params: AppleCalender.EventOptions = options
+  if (!params.title || !params.startDate || !params.endDate) {
+    throw new Error("title, startDate, and endDate are required");
+  }
 
-  const result = await AppleCalender.addEvent(params)
-
-  return Response.json({ result })
+  const result = await AppleCalender.addEvent(params);
+  return Response.json({ result });
 }

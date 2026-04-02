@@ -1,22 +1,25 @@
-import { RequestOptions, AppleCalender } from "@enconvo/api";
+import { AppleCalender } from "@enconvo/api";
 
 /** Delete calendar event request params */
-interface DeleteCalendarEventOptions extends RequestOptions {
+interface DeleteCalendarEventParams {
   /** ID of the event to delete @required */
-  eventId: string
+  eventId: string;
   /** Whether to delete all recurrences of a repeating event */
-  deleteAllRecurrences?: boolean
+  allEvents?: boolean;
 }
 
 /**
  * Delete a calendar event by ID
- * @param {Request} req - Request object, body is {@link DeleteCalendarEventOptions}
- * @returns Deletion result
+ * @param {Request} req - Request object, body is {@link DeleteCalendarEventParams}
+ * @returns Deletion confirmation with status and id
  */
 export default async function main(req: Request) {
-  const options: DeleteCalendarEventOptions = await req.json()
+  const params = (await req.json()) as DeleteCalendarEventParams;
 
-  const result = await AppleCalender.deleteCalendarEvent(options)
+  if (!params.eventId) {
+    throw new Error("eventId is required");
+  }
 
-  return Response.json({ result })
+  const result = await AppleCalender.deleteCalendarEvent(params);
+  return Response.json({ result });
 }
