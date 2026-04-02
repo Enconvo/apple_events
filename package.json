@@ -10,7 +10,7 @@
   "type": "module",
   "name": "apple-apps-and-services",
   "title": "Apple Apps & Services",
-  "description": "Apple Calendar integration with full CRUD operations -- add, update, delete, and query events and calendars using native macOS APIs, with support for recurrence rules, alarms, and all-day events.",
+  "description": "Manage Apple apps via native macOS APIs -- Calendar, Contacts, Mail, Messages, Maps, Notes, and Reminders with full CRUD operations, search, batch actions, and multi-account support.",
   "icon": "calender.png",
   "minAppVersion": "1.4.9",
   "commands": [],

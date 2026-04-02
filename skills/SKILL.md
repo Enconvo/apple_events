@@ -1,7 +1,7 @@
 ---
 name: apple-apps-and-services
 description: >
-  Apple Calendar integration with full CRUD operations -- add, update, delete, and query events and calendars using native macOS APIs, with support for recurrence rules, alarms, and all-day events.
+  Manage Apple apps via native macOS APIs -- Calendar, Contacts, Mail, Messages, Maps, Notes, and Reminders with full CRUD operations, search, batch actions, and multi-account support.
 metadata:
   author: Enconvo
   version: "0.0.132"
@@ -88,3 +88,5 @@ Just use the `local_api` tool to request these APIs.
 ## References
 
 - [Apple Contacts](references/contacts.md) — AppleScript patterns for querying Contacts.app (phone lookup gotchas, name search, output format).
+- [Apple Mail](references/mail.md) — Email management workflows: send, search, organize, attachments, rules, and multi-account support.
+- [Apple Notes](references/notes.md) — Note CRUD, folders, search, batch operations, markdown export, and multi-account support.
