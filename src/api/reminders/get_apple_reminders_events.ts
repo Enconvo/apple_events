@@ -1,4 +1,4 @@
-import { AppleReminders } from "@enconvo/api";
+import { getRemindersEventList } from "./utils/reminders_util.ts";
 
 /**
  * Get all reminder items from Apple Reminders
@@ -6,7 +6,7 @@ import { AppleReminders } from "@enconvo/api";
  * @returns Array of reminders
  */
 export default async function main(req: Request) {
-  const result = await AppleReminders.getRemindersEventList()
+  const result = await getRemindersEventList();
 
-  return Response.json({ result })
+  return Response.json({ result });
 }

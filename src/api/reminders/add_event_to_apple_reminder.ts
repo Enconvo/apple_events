@@ -1,8 +1,7 @@
-import { RequestOptions } from "@enconvo/api";
 import { addEventToAppleReminder } from "./utils/reminders_util.ts";
 
 /** Add reminder request params */
-interface AddEventToAppleReminderOptions extends RequestOptions {
+interface AddEventToAppleReminderOptions {
   /** Reminder title @required */
   title: string;
   /** Reminder list ID to add to */

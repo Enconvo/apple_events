@@ -1,4 +1,4 @@
-import { AppleReminders } from "@enconvo/api";
+import { toggleReminderCompletionStatus } from "./utils/reminders_util.ts";
 
 /** Toggle reminder completion status params */
 interface ToggleReminderCompletionStatusParams {
@@ -14,7 +14,7 @@ interface ToggleReminderCompletionStatusParams {
 export default async function main(req: Request) {
   const params = await req.json() as ToggleReminderCompletionStatusParams;
 
-  const result = await AppleReminders.toggleReminderCompletionStatus(params.reminderId)
+  const result = await toggleReminderCompletionStatus(params.reminderId);
 
-  return Response.json({ result })
+  return Response.json({ result });
 }

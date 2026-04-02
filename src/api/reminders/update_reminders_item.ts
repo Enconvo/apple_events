@@ -1,8 +1,7 @@
-import { RequestOptions } from "@enconvo/api";
 import { updateRemindersItem } from "./utils/reminders_util.ts";
 
 /** Update reminder request params */
-interface UpdateRemindersItemOptions extends RequestOptions {
+interface UpdateRemindersItemOptions {
   /** ID of the reminder to update @required */
   reminderId: string;
   /** Updated reminder title */
