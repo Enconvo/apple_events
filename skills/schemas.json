@@ -407,11 +407,10 @@
           "type": "object",
           "properties": {
             "ids": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "description": ""
-              },
+              "type": [
+                "string",
+                "array"
+              ],
               "description": "Message ID or array of IDs"
             },
             "account": {
@@ -472,11 +471,10 @@
           "type": "object",
           "properties": {
             "ids": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "description": ""
-              },
+              "type": [
+                "string",
+                "array"
+              ],
               "description": "Message ID or array of IDs"
             },
             "account": {
@@ -717,11 +715,10 @@
           "type": "object",
           "properties": {
             "ids": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "description": ""
-              },
+              "type": [
+                "string",
+                "array"
+              ],
               "description": "Message ID or array of IDs"
             },
             "account": {
@@ -748,11 +745,10 @@
           "type": "object",
           "properties": {
             "ids": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "description": ""
-              },
+              "type": [
+                "string",
+                "array"
+              ],
               "description": "Message ID or array of IDs"
             },
             "account": {
@@ -779,11 +775,10 @@
           "type": "object",
           "properties": {
             "ids": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "description": ""
-              },
+              "type": [
+                "string",
+                "array"
+              ],
               "description": "Message ID or array of IDs"
             },
             "account": {
@@ -1035,11 +1030,10 @@
           "type": "object",
           "properties": {
             "ids": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "description": ""
-              },
+              "type": [
+                "string",
+                "array"
+              ],
               "description": "Message ID or array of IDs"
             },
             "account": {

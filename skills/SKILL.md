@@ -4,7 +4,7 @@ description: >
   Manage Apple apps via native macOS APIs -- Calendar, Contacts, Mail, Messages, Maps, Notes, and Reminders with full CRUD operations, search, batch actions, and multi-account support.
 metadata:
   author: Enconvo
-  version: "0.0.133"
+  version: "0.0.144"
 ---
 
 ## API Reference
@@ -25,10 +25,10 @@ Just use the `local_api` tool to request these APIs.
 | `apple-apps-and-services/mail/create_draft` | Create an email draft with recipients and content. _6 params — use `check_local_api_schemas` tool_ |
 | `apple-apps-and-services/mail/create_mailbox` | Create a new mailbox in a mail account. Params: `name` (string, required), `account` (string) |
 | `apple-apps-and-services/mail/delete_mailbox` | Delete a mailbox from a mail account. Params: `name` (string, required), `account` (string) |
-| `apple-apps-and-services/mail/delete_message` | Delete one or more messages (moves to Trash). Params: `ids` (array, required), `account` (string, required), `mailbox` (string, required) |
+| `apple-apps-and-services/mail/delete_message` | Delete one or more messages (moves to Trash). Params: `ids` (string,array, required), `account` (string, required), `mailbox` (string, required) |
 | `apple-apps-and-services/mail/disable_rule` | Disable a mail rule by name. Params: `name` (string, required) |
 | `apple-apps-and-services/mail/enable_rule` | Enable a mail rule by name. Params: `name` (string, required) |
-| `apple-apps-and-services/mail/flag_message` | Flag one or more messages. Params: `ids` (array, required), `account` (string, required), `mailbox` (string, required) |
+| `apple-apps-and-services/mail/flag_message` | Flag one or more messages. Params: `ids` (string,array, required), `account` (string, required), `mailbox` (string, required) |
 | `apple-apps-and-services/mail/forward_message` | Forward a message to recipients with optional body prepend. _6 params — use `check_local_api_schemas` tool_ |
 | `apple-apps-and-services/mail/get_mail_stats` | Get per-account inbox statistics including total and unread message counts. _No params_ |
 | `apple-apps-and-services/mail/get_message` | Get full message content including recipients and CC. _4 params — use `check_local_api_schemas` tool_ |
@@ -39,15 +39,15 @@ Just use the `local_api` tool to request these APIs.
 | `apple-apps-and-services/mail/list_mailboxes` | List mailboxes with unread counts, optionally filtered by account. Params: `account` (string) |
 | `apple-apps-and-services/mail/list_messages` | List messages in a mailbox with pagination and filters. _6 params — use `check_local_api_schemas` tool_ |
 | `apple-apps-and-services/mail/list_rules` | List all mail rules with enabled status. _No params_ |
-| `apple-apps-and-services/mail/mark_as_read` | Mark one or more messages as read. Params: `ids` (array, required), `account` (string, required), `mailbox` (string, required) |
-| `apple-apps-and-services/mail/mark_as_unread` | Mark one or more messages as unread. Params: `ids` (array, required), `account` (string, required), `mailbox` (string, required) |
+| `apple-apps-and-services/mail/mark_as_read` | Mark one or more messages as read. Params: `ids` (string,array, required), `account` (string, required), `mailbox` (string, required) |
+| `apple-apps-and-services/mail/mark_as_unread` | Mark one or more messages as unread. Params: `ids` (string,array, required), `account` (string, required), `mailbox` (string, required) |
 | `apple-apps-and-services/mail/move_message` | Move one or more messages to a different mailbox. _5 params — use `check_local_api_schemas` tool_ |
 | `apple-apps-and-services/mail/rename_mailbox` | Rename an existing mailbox. Params: `old_name` (string, required), `new_name` (string, required), `account` (string) |
 | `apple-apps-and-services/mail/reply_to_message` | Reply to a message with optional reply-all and send/draft options. _6 params — use `check_local_api_schemas` tool_ |
 | `apple-apps-and-services/mail/save_attachment` | Save an email attachment to disk. _5 params — use `check_local_api_schemas` tool_ |
 | `apple-apps-and-services/mail/search_messages` | Search messages with query, sender, subject, date, and status filters. _10 params — use `check_local_api_schemas` tool_ |
 | `apple-apps-and-services/mail/send_email` | Send an email with optional CC, BCC, and attachments. _7 params — use `check_local_api_schemas` tool_ |
-| `apple-apps-and-services/mail/unflag_message` | Remove flag from one or more messages. Params: `ids` (array, required), `account` (string, required), `mailbox` (string, required) |
+| `apple-apps-and-services/mail/unflag_message` | Remove flag from one or more messages. Params: `ids` (string,array, required), `account` (string, required), `mailbox` (string, required) |
 | `apple-apps-and-services/maps/add_to_guide` | Add a location to an existing guide in Apple Maps. Params: `guide_name` (string, required), `location_query` (string, required) |
 | `apple-apps-and-services/maps/create_guide` | Create a new guide in Apple Maps. Params: `name` (string, required) |
 | `apple-apps-and-services/maps/drop_pin` | Drop a pin at a location in Apple Maps. Params: `address` (string, required), `label` (string) |
