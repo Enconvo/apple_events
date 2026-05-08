@@ -4,7 +4,7 @@ description: >
   Manage Apple apps via native macOS APIs -- Calendar, Contacts, Mail, Messages, Maps, Notes, and Reminders with full CRUD operations, search, batch actions, and multi-account support.
 metadata:
   author: Enconvo
-  version: "0.0.144"
+  version: "0.0.183"
 ---
 
 ## API Reference
